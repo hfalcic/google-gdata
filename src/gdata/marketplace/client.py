@@ -30,7 +30,7 @@ import urllib
 
 
 # Feed URI template.  This must end with a /
-# The strings in this template are eventually replaced with the API version 
+# The strings in this template are eventually replaced with the API version
 # and Google Apps domain name, respectively.
 LICENSE_ROOT_URL = 'http://feedserver-enterprise.googleusercontent.com'
 LICENSE_FEED_TEMPLATE = '%s/license?bq=' % LICENSE_ROOT_URL
@@ -64,7 +64,7 @@ class LicensingClient(gdata.client.GDClient):
   def make_license_feed_uri(self, app_id=None, params=None):
     """Creates a license feed URI for the Google Apps Marketplace Licensing API.
 
-    Using this client's Google Apps domain, create a license feed URI for a particular application 
+    Using this client's Google Apps domain, create a license feed URI for a particular application
     in this domain. If params are provided, append them as GET params.
 
     Args:
@@ -82,11 +82,11 @@ class LicensingClient(gdata.client.GDClient):
     return uri
 
   MakeLicenseFeedUri = make_license_feed_uri
-  
+
   def make_license_notifications_feed_uri(self, app_id=None, startdatetime=None, max_results=None, params=None):
     """Creates a license notifications feed URI for the Google Apps Marketplace Licensing API.
 
-    Using this client's Google Apps domain, create a license notifications feed URI for a particular application. 
+    Using this client's Google Apps domain, create a license notifications feed URI for a particular application.
     If params are provided, append them as GET params.
 
     Args:
@@ -114,7 +114,7 @@ class LicensingClient(gdata.client.GDClient):
     return uri
 
   MakeLicenseNotificationsFeedUri = make_license_notifications_feed_uri
-  
+
   def get_license(self, uri=None, app_id=None, **kwargs):
     """Fetches the application's license by application ID.
 
@@ -124,7 +124,7 @@ class LicensingClient(gdata.client.GDClient):
       kwargs: The other parameters to pass to gdata.client.GDClient.get_entry().
 
     Returns:
-      A License feed object representing the license with the given 
+      A License feed object representing the license with the given
       base URI and application ID.
     """
 
@@ -135,7 +135,7 @@ class LicensingClient(gdata.client.GDClient):
                           **kwargs)
 
   GetLicense = get_license
-  
+
   def get_license_notifications(self, uri=None, app_id=None, startdatetime=None, max_results=None, **kwargs):
     """Fetches the application's license notifications by application ID.
 
@@ -147,7 +147,7 @@ class LicensingClient(gdata.client.GDClient):
       kwargs: The other parameters to pass to gdata.client.GDClient.get_entry().
 
     Returns:
-      A License feed object representing the license notifications with the given 
+      A License feed object representing the license notifications with the given
       base URI and application ID.
     """
 

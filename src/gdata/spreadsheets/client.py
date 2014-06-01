@@ -381,7 +381,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
                desired_class=gdata.spreadsheets.data.CellEntry,
                auth_token=None, **kwargs):
     """Retrieves a single cell from the worksheet.
-    
+
     Indexes are 1 based so the first cell in the worksheet is 1, 1.
 
     Args:
@@ -418,7 +418,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
                     desired_class=gdata.spreadsheets.data.ListsFeed,
                     auth_token=None, **kwargs):
     """Retrieves the value rows from the worksheet's list feed.
-    
+
     The list feed is a view of the spreadsheet in which the first row is used
     for column names and subsequent rows up to the first blank line are
     records.
@@ -450,7 +450,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
                          **kwargs)
 
   GetListFeed = get_list_feed
-                    
+
   def add_list_entry(self, list_entry, spreadsheet_key, worksheet_id,
                      auth_token=None, **kwargs):
     """Adds a new row to the worksheet's list feed.

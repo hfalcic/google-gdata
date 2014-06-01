@@ -69,7 +69,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
       parent_org_unit_path: The full path of the parental tree to this organization unit (default: '/').
                             Note: Each element of the path MUST be URL encoded (example: finance%2Forganization/suborganization)
       description: The human readable text description of the organization unit (optional).
-      block_inheritance: This parameter blocks policy setting inheritance 
+      block_inheritance: This parameter blocks policy setting inheritance
                          from organization units higher in the organization tree (default: False).
 
     Returns:
@@ -84,7 +84,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     properties['blockInheritance'] = self._Bool2Str(block_inheritance)
     return self._PostProperties(uri, properties)
 
-  def UpdateOrgUnit(self, customer_id, org_unit_path, name=None, parent_org_unit_path=None, 
+  def UpdateOrgUnit(self, customer_id, org_unit_path, name=None, parent_org_unit_path=None,
                     description=None, block_inheritance=None):
     """Update a Organization Unit.
 
@@ -96,13 +96,13 @@ class OrganizationService(gdata.apps.service.PropertyService):
       parent_org_unit_path: The full path of the parental tree to this organization unit.
                             Note: Each element of the path MUST be URL encoded (example: finance%2Forganization/suborganization)
       description: The human readable text description of the organization unit.
-      block_inheritance: This parameter blocks policy setting inheritance 
+      block_inheritance: This parameter blocks policy setting inheritance
                          from organization units higher in the organization tree.
 
     Returns:
       A dict containing the result of the update operation.
     """
-    
+
     uri = UNIT_URL % (customer_id, org_unit_path)
     properties = {}
     if name:
@@ -114,7 +114,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     if block_inheritance:
       properties['blockInheritance'] = self._Bool2Str(block_inheritance)
     return self._PutProperties(uri, properties)
-    
+
   def MoveUserToOrgUnit(self, customer_id, org_unit_path, users_to_move):
     """Move a user to an Organization Unit.
 
@@ -127,7 +127,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the update operation.
     """
-    
+
     uri = UNIT_URL % (customer_id, org_unit_path)
     properties = {}
     if users_to_move and isinstance(users_to_move, list):
@@ -147,7 +147,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     """
     uri = UNIT_URL % (customer_id, org_unit_path)
     return self._GetProperties(uri)
- 
+
   def DeleteOrgUnit(self, customer_id, org_unit_path):
     """Delete a Orgunit based on its path.
 
@@ -176,11 +176,11 @@ class OrganizationService(gdata.apps.service.PropertyService):
 
   def RetrievePageOfOrgUnits(self, customer_id, startKey=None):
     """Retrieve one page of OrgUnits in the customer's domain.
-    
+
     Args:
       customer_id: The ID of the Google Apps customer.
       startKey: The key to continue for pagination through all OrgUnits.
-      
+
     Returns:
       A feed object containing the result of the retrieve operation.
     """
@@ -216,7 +216,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     """
     uri = USER_URL % (customer_id, user_email)
     return self._GetProperties(uri)
-    
+
   def UpdateOrgUser(self, customer_id, user_email, org_unit_path):
     """Update the OrgUnit of a OrgUser.
 
@@ -229,7 +229,7 @@ class OrganizationService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the update operation.
     """
-    
+
     uri = USER_URL % (customer_id, user_email)
     properties = {}
     if org_unit_path:
@@ -250,11 +250,11 @@ class OrganizationService(gdata.apps.service.PropertyService):
 
   def RetrievePageOfOrgUsers(self, customer_id, startKey=None):
     """Retrieve one page of OrgUsers in the customer's domain.
-    
+
     Args:
       customer_id: The ID of the Google Apps customer.
       startKey: The key to continue for pagination through all OrgUnits.
-      
+
     Returns:
       A feed object containing the result of the retrieve operation.
     """

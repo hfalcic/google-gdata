@@ -107,7 +107,7 @@ class GroupsProvisioningClient(gdata.client.GDClient):
         member_id=member_id, params=params)
 
   MakeGroupMembersUri = make_group_member_uri
-  
+
   def RetrieveAllPages(self, feed, desired_class=gdata.data.GDFeed):
     """Retrieve all pages and add all elements.
 
@@ -116,7 +116,7 @@ class GroupsProvisioningClient(gdata.client.GDClient):
       desired_class: type of Feed to be returned.
 
     Returns:
-      desired_class: subclass of gdata.data.GDFeed. 
+      desired_class: subclass of gdata.data.GDFeed.
     """
 
     next = feed.GetNextLink()
@@ -170,7 +170,7 @@ class GroupsProvisioningClient(gdata.client.GDClient):
         desired_class=gdata.apps.groups.data.GroupEntry, **kwargs)
 
   RetrieveGroup = retrieve_group
-  
+
   def retrieve_page_of_member_groups(self, member_id, direct_only=False,
                                      **kwargs):
     """Retrieve one page of groups that belong to the given member_id.
@@ -187,7 +187,7 @@ class GroupsProvisioningClient(gdata.client.GDClient):
                                         'directOnly':direct_only})
     return self.GetFeed(uri,
         desired_class=gdata.apps.groups.data.GroupFeed, **kwargs)
-    
+
   RetrievePageOfMemberGroups = retrieve_page_of_member_groups
 
   def retrieve_groups(self, member_id, direct_only=False, **kwargs):

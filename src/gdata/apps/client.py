@@ -64,7 +64,7 @@ class AppsClient(gdata.client.GDClient):
       desired_class: type of feed to be returned.
 
     Returns:
-      desired_class: subclass of gdata.data.GDFeed. 
+      desired_class: subclass of gdata.data.GDFeed.
     """
 
     next = feed.GetNextLink()

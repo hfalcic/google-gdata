@@ -84,14 +84,14 @@ class MigrationService(gdata.apps.service.AppsService):
     try:
       return migration.MailEntryFromString(str(self.Post(mail_entry, uri)))
     except gdata.service.RequestError, e:
-      # Store the number of failed imports when importing several at a time 
+      # Store the number of failed imports when importing several at a time
       self.exceptions += 1
       raise gdata.apps.service.AppsForYourDomainException(e.args[0])
 
   def AddBatchEntry(self, mail_message, mail_item_properties,
                     mail_labels):
     """Adds a message to the current batch that you later will submit.
-    
+
     Deprecated, use AddMailEntry instead
 
     Args:
@@ -118,7 +118,7 @@ class MigrationService(gdata.apps.service.AppsService):
 
   def SubmitBatch(self, user_name):
     """Sends all the mail items you have added to the batch to the server.
-    
+
     Deprecated, use ImportMultipleMails instead
 
     Args:
@@ -146,14 +146,14 @@ class MigrationService(gdata.apps.service.AppsService):
   def AddMailEntry(self, mail_message, mail_item_properties=None,
                    mail_labels=None, identifier=None):
     """Prepares a list of mail messages to import using ImportMultipleMails.
-    
+
     Args:
       mail_message: An RFC822 format email message as a string.
       mail_item_properties: List of Gmail properties to apply to the
           message.
       mail_labels: List of Gmail labels to apply to the message.
       identifier: The optional file identifier string
-    
+
     Returns:
       The number of email messages to be imported.
     """
@@ -168,14 +168,14 @@ class MigrationService(gdata.apps.service.AppsService):
 
   def ImportMultipleMails(self, user_name, threads_per_batch=20):
     """Launches separate threads to import every message added by AddMailEntry.
-    
+
     Args:
       user_name: The user account name to import messages to.
       threads_per_batch: Number of messages to import at a time.
-    
+
     Returns:
       The number of email messages that were successfully migrated.
-    
+
     Raises:
       Exception: An error occurred while importing mails.
     """

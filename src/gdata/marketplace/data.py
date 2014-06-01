@@ -31,25 +31,25 @@ LICENSES_TEMPLATE = '{%s}%%s' % LICENSES_NAMESPACE
 
 class Enabled(atom.core.XmlElement):
   """ """
-  
+
   _qname = LICENSES_TEMPLATE % 'enabled'
 
 
 class Id(atom.core.XmlElement):
   """ """
-  
+
   _qname = LICENSES_TEMPLATE % 'id'
 
 
 class CustomerId(atom.core.XmlElement):
   """ """
-  
+
   _qname = LICENSES_TEMPLATE % 'customerid'
 
 
 class DomainName(atom.core.XmlElement):
   """ """
-  
+
   _qname = LICENSES_TEMPLATE % 'domainname'
 
 
@@ -87,7 +87,7 @@ class Entity(atom.core.XmlElement):
   """ The entity representing the License. """
 
   _qname = LICENSES_TEMPLATE % 'entity'
-  
+
   enabled = Enabled
   id = Id
   customer_id = CustomerId
@@ -104,10 +104,10 @@ class Content(atom.data.Content):
 
 class LicenseEntry(gdata.data.GDEntry):
   """ Represents a LicenseEntry object. """
-  
+
   content = Content
 
-  
+
 class LicenseFeed(gdata.data.GDFeed):
   """ Represents a feed of LicenseEntry objects. """
 

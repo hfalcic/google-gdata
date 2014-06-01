@@ -353,9 +353,9 @@ class XmlElement(object):
 
     if pretty_print and xmlString is not None:
         return xmlString(tree_string).toprettyxml()
- 
+
     return tree_string
- 
+
   ToString = to_string
 
   def __str__(self):

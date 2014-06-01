@@ -302,7 +302,7 @@ class ListEntry(gdata.data.GDEntry):
 
   def from_dict(self, values):
     """Sets values for this row from the dictionary.
-    
+
     Old values which are already in the entry will not be removed unless
     they are overwritten with new values from the dict.
     """
@@ -348,7 +348,7 @@ class CellsFeed(gdata.data.BatchFeed):
 
   def add_set_cell(self, row, col, input_value):
     """Adds a request to change the contents of a cell to this batch request.
-    
+
     Args:
       row: int, The row number for this cell. Numbering starts at 1.
       col: int, The column number for this cell. Starts at 1.
@@ -365,12 +365,12 @@ class CellsFeed(gdata.data.BatchFeed):
 
 def build_batch_cells_update(spreadsheet_key, worksheet_id):
   """Creates an empty cells feed for adding batch cell updates to.
-  
+
   Call batch_set_cell on the resulting CellsFeed instance then send the batch
   request TODO: fill in
 
   Args:
-    spreadsheet_key: The ID of the spreadsheet 
+    spreadsheet_key: The ID of the spreadsheet
     worksheet_id:
   """
   feed_id_text = BATCH_POST_ID_TEMPLATE % (spreadsheet_key, worksheet_id)

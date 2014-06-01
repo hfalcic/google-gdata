@@ -50,10 +50,10 @@ class AuditService(gdata.apps.service.PropertyService):
     properties['publicKey'] = b64pgpkey
     return self._PostProperties(uri, properties)
 
-  def createEmailMonitor(self, source_user, destination_user, end_date, 
-                         begin_date=None, incoming_headers_only=False, 
-                         outgoing_headers_only=False, drafts=False, 
-                         drafts_headers_only=False, chats=False, 
+  def createEmailMonitor(self, source_user, destination_user, end_date,
+                         begin_date=None, incoming_headers_only=False,
+                         outgoing_headers_only=False, drafts=False,
+                         drafts_headers_only=False, chats=False,
                          chats_headers_only=False):
     """Creates a email monitor, forwarding the source_users emails/chats
 
@@ -62,7 +62,7 @@ class AuditService(gdata.apps.service.PropertyService):
       destination_user: string, the user to receive the audited email
       end_date: string, the date the audit will end in
                 "yyyy-MM-dd HH:mm" format, required
-      begin_date: string, the date the audit will start in 
+      begin_date: string, the date the audit will start in
                   "yyyy-MM-dd HH:mm" format, leave blank to use current time
       incoming_headers_only: boolean, whether to audit only the headers of
                              mail delivered to source user

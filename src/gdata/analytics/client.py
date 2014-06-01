@@ -106,7 +106,7 @@ class AnalyticsClient(gdata.client.GDClient):
 
 class AnalyticsBaseQuery(gdata.client.GDQuery):
   """Abstracts common configuration across all query objects.
-  
+
   Attributes:
     scheme: string The default scheme. Should always be https.
     host: string The default host.
