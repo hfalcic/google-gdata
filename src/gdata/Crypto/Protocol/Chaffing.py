@@ -1,3 +1,28 @@
+#
+#  Chaffing.py : chaffing & winnowing support
+#
+# Part of the Python Cryptography Toolkit
+#
+# Written by Andrew M. Kuchling, Barry A. Warsaw, and others
+#
+# ===================================================================
+# The contents of this file are dedicated to the public domain.  To
+# the extent that dedication to the public domain is not available,
+# everyone is granted a worldwide, perpetual, royalty-free,
+# non-exclusive license to exercise all rights associated with the
+# contents of this file for any purpose whatsoever.
+# No rights are reserved.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ===================================================================
+#
 """This file implements the chaffing algorithm.
 
 Winnowing and chaffing is a technique for enhancing privacy without requiring
@@ -42,7 +67,7 @@ http://theory.lcs.mit.edu/~rivest/chaffing.txt
 
 """
 
-__revision__ = "$Id: Chaffing.py,v 1.7 2003/02/28 15:23:21 akuchling Exp $"
+__revision__ = "$Id$"
 
 from Crypto.Util.number import bytes_to_long
 
@@ -115,7 +140,7 @@ class Chaff:
         # chaffed.
         count = len(blocks) * self.__factor
         blocksper = range(self.__blocksper)
-        for i, wheat in enumerate(blocks):
+        for i, wheat in zip(range(len(blocks)), blocks):
             # it shouldn't matter which of the n blocks we add chaff to, so for
             # ease of implementation, we'll just add them to the first count
             # blocks
@@ -144,18 +169,8 @@ class Chaff:
         return chaffedblocks
 
     def _randnum(self, size):
-        # TBD: Not a very secure algorithm.
-        # TBD: size * 2 to work around possible bug in RandomPool
-        from Crypto.Util import randpool
-        import time
-        pool = randpool.RandomPool(size * 2)
-        while size > pool.entropy:
-            pass
-
-        # we now have enough entropy in the pool to get size bytes of random
-        # data... well, probably
-        return pool.get_bytes(size)
-
+        from Crypto import Random
+        return Random.new().read(size)
 
 
 if __name__ == '__main__':
@@ -190,7 +205,7 @@ likely to effect their Safety and Happiness.
 
     # put these into a form acceptable as input to the chaffing procedure
     source = []
-    m = list(enumerate(zip(blocks, macs)))
+    m = zip(range(len(blocks)), blocks, macs)
     print m
     for i, data, mac in m:
         source.append((i, data, mac))
@@ -222,6 +237,7 @@ likely to effect their Safety and Happiness.
 
     # now decode the message packets and check it against the original text
     print 'Undigesting wheat...'
+    # PY3K: This is meant to be text, do not change to bytes (data)
     newtext = "".join(wheat)
     if newtext == text:
         print 'They match!'

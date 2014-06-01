@@ -1,12 +1,34 @@
-#!/usr/local/bin/python
 # rfc1751.py : Converts between 128-bit strings and a human-readable
 # sequence of words, as defined in RFC1751: "A Convention for
 # Human-Readable 128-bit Keys", by Daniel L. McDonald.
+#
+# Part of the Python Cryptography Toolkit
+#
+# Written by Andrew M. Kuchling and others
+#
+# ===================================================================
+# The contents of this file are dedicated to the public domain.  To
+# the extent that dedication to the public domain is not available,
+# everyone is granted a worldwide, perpetual, royalty-free,
+# non-exclusive license to exercise all rights associated with the
+# contents of this file for any purpose whatsoever.
+# No rights are reserved.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ===================================================================
 
-__revision__ = "$Id: RFC1751.py,v 1.6 2003/04/04 15:15:10 akuchling Exp $"
+__revision__ = "$Id$"
 
 
-import string, binascii
+import binascii
+from Crypto.Util.py3compat import *
 
 binary={0:'0000', 1:'0001', 2:'0010', 3:'0011', 4:'0100', 5:'0101',
         6:'0110', 7:'0111', 8:'1000', 9:'1001', 10:'1010', 11:'1011',
@@ -14,18 +36,18 @@ binary={0:'0000', 1:'0001', 2:'0010', 3:'0011', 4:'0100', 5:'0101',
 
 def _key2bin(s):
     "Convert a key into a string of binary digits"
-    kl=map(lambda x: ord(x), s)
-    kl=map(lambda x: binary[x/16]+binary[x&15], kl)
+    kl=map(lambda x: bord(x), s)
+    kl=map(lambda x: binary[x>>4]+binary[x&15], kl)
     return ''.join(kl)
 
 def _extract(key, start, length):
-    """Extract a bitstring from a string of binary digits, and return its
+    """Extract a bitstring(2.x)/bytestring(2.x) from a string of binary digits, and return its
     numeric value."""
     k=key[start:start+length]
     return reduce(lambda x,y: x*2+ord(y)-48, k, 0)
 
 def key_to_english (key):
-    """key_to_english(key:string) : string
+    """key_to_english(key:string(2.x)/bytes(3.x)) : string
     Transform an arbitrary key into a string containing English words.
     The key length must be a multiple of 8.
     """
@@ -36,20 +58,20 @@ def key_to_english (key):
         skbin=_key2bin(subkey) ; p=0
         for i in range(0, 64, 2): p=p+_extract(skbin, i, 2)
         # Append parity bits to the subkey
-        skbin=_key2bin(subkey+chr((p<<6) & 255))
+        skbin=_key2bin(subkey+bchr((p<<6) & 255))
         for i in range(0, 64, 11):
             english=english+wordlist[_extract(skbin, i, 11)]+' '
 
     return english[:-1]                 # Remove the trailing space
 
-def english_to_key (str):
-    """english_to_key(string):string
+def english_to_key (s):
+    """english_to_key(string):string(2.x)/bytes(2.x)
     Transform a string into a corresponding key.
     The string must contain words separated by whitespace; the number
     of words must be a multiple of 6.
     """
 
-    L=string.split(string.upper(str)) ; key=''
+    L=s.upper().split() ; key=b('')
     for index in range(0, len(L), 6):
         sublist=L[index:index+6] ; char=9*[0] ; bits=0
         for i in sublist:
@@ -58,15 +80,15 @@ def english_to_key (str):
             y = index << shift
             cl, cc, cr = (y>>16), (y>>8)&0xff, y & 0xff
             if (shift>5):
-                char[bits/8] = char[bits/8] | cl
-                char[bits/8+1] = char[bits/8+1] | cc
-                char[bits/8+2] = char[bits/8+2] | cr
+                char[bits>>3] = char[bits>>3] | cl
+                char[(bits>>3)+1] = char[(bits>>3)+1] | cc
+                char[(bits>>3)+2] = char[(bits>>3)+2] | cr
             elif shift>-3:
-                char[bits/8] = char[bits/8] | cc
-                char[bits/8+1] = char[bits/8+1] | cr
-            else: char[bits/8] = char[bits/8] | cr
+                char[bits>>3] = char[bits>>3] | cc
+                char[(bits>>3)+1] = char[(bits>>3)+1] | cr
+            else: char[bits>>3] = char[bits>>3] | cr
             bits=bits+11
-        subkey=reduce(lambda x,y:x+chr(y), char, '')
+        subkey=reduce(lambda x,y:x+bchr(y), char, b(''))
 
         # Check the parity of the resulting key
         skbin=_key2bin(subkey)

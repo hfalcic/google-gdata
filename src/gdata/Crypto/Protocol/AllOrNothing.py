@@ -1,3 +1,28 @@
+#
+#  AllOrNothing.py : all-or-nothing package transformations
+#
+# Part of the Python Cryptography Toolkit
+#
+# Written by Andrew M. Kuchling and others
+#
+# ===================================================================
+# The contents of this file are dedicated to the public domain.  To
+# the extent that dedication to the public domain is not available,
+# everyone is granted a worldwide, perpetual, royalty-free,
+# non-exclusive license to exercise all rights associated with the
+# contents of this file for any purpose whatsoever.
+# No rights are reserved.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# ===================================================================
+
 """This file implements all-or-nothing package transformations.
 
 An all-or-nothing package transformation is one in which some text is
@@ -17,13 +42,20 @@ http://theory.lcs.mit.edu/~rivest/fusion.pdf
 
 """
 
-__revision__ = "$Id: AllOrNothing.py,v 1.8 2003/02/28 15:23:20 akuchling Exp $"
+__revision__ = "$Id$"
 
 import operator
-import string
+import sys
 from Crypto.Util.number import bytes_to_long, long_to_bytes
+from Crypto.Util.py3compat import *
 
-
+def isInt(x):
+    test = 0
+    try:
+        test += x
+    except TypeError:
+        return 0
+    return 1
 
 class AllOrNothing:
     """Class implementing the All-or-Nothing package transform.
@@ -55,10 +87,10 @@ class AllOrNothing:
         self.__mode = mode
         self.__IV = IV
         self.__key_size = ciphermodule.key_size
-        if self.__key_size == 0:
+        if not isInt(self.__key_size) or self.__key_size==0:
             self.__key_size = 16
 
-    __K0digit = chr(0x69)
+    __K0digit = bchr(0x69)
 
     def digest(self, text):
         """digest(text:string) : [string]
@@ -88,7 +120,7 @@ class AllOrNothing:
         # the undigest() step.
         block_size = self.__ciphermodule.block_size
         padbytes = block_size - (len(text) % block_size)
-        text = text + ' ' * padbytes
+        text = text + b(' ') * padbytes
 
         # Run through the algorithm:
         # s: number of message blocks (size of text / block_size)
@@ -102,7 +134,7 @@ class AllOrNothing:
         # The one complication I add is that the last message block is hard
         # coded to the number of padbytes added, so that these can be stripped
         # during the undigest() step
-        s = len(text) / block_size
+        s = divmod(len(text), block_size)[0]
         blocks = []
         hashes = []
         for i in range(1, s+1):
@@ -139,7 +171,7 @@ class AllOrNothing:
         # we convert the blocks to strings since in Python, byte sequences are
         # always represented as strings.  This is more consistent with the
         # model that encryption and hash algorithms always operate on strings.
-        return map(long_to_bytes, blocks)
+        return [long_to_bytes(i,self.__ciphermodule.block_size) for i in blocks]
 
 
     def undigest(self, blocks):
@@ -164,13 +196,14 @@ class AllOrNothing:
         # encrypted, and create the hash cipher.
         K0 = self.__K0digit * self.__key_size
         hcipher = self.__newcipher(K0)
+        block_size = self.__ciphermodule.block_size
 
         # Since we have all the blocks (or this method would have been called
-        # prematurely), we can calcualte all the hash blocks.
+        # prematurely), we can calculate all the hash blocks.
         hashes = []
         for i in range(1, len(blocks)):
             mticki = blocks[i-1] ^ i
-            hi = hcipher.encrypt(long_to_bytes(mticki))
+            hi = hcipher.encrypt(long_to_bytes(mticki, block_size))
             hashes.append(bytes_to_long(hi))
 
         # now we can calculate K' (key).  remember the last block contains
@@ -178,8 +211,7 @@ class AllOrNothing:
         key = blocks[-1] ^ reduce(operator.xor, hashes)
 
         # and now we can create the cipher object
-        mcipher = self.__newcipher(long_to_bytes(key))
-        block_size = self.__ciphermodule.block_size
+        mcipher = self.__newcipher(long_to_bytes(key, self.__key_size))
 
         # And we can now decode the original message blocks
         parts = []
@@ -193,21 +225,13 @@ class AllOrNothing:
         # of the cipher's block_size.  This number should be small enough that
         # the conversion from long integer to integer should never overflow
         padbytes = int(parts[-1])
-        text = string.join(map(long_to_bytes, parts[:-1]), '')
+        text = b('').join(map(long_to_bytes, parts[:-1]))
         return text[:-padbytes]
 
     def _inventkey(self, key_size):
-        # TBD: Not a very secure algorithm.  Eventually, I'd like to use JHy's
-        # kernelrand module
-        import time
-        from Crypto.Util import randpool
-        # TBD: key_size * 2 to work around possible bug in RandomPool?
-        pool = randpool.RandomPool(key_size * 2)
-        while key_size > pool.entropy:
-            pool.add_event()
-
-        # we now have enough entropy in the pool to get a key_size'd key
-        return pool.get_bytes(key_size)
+        # Return key_size random bytes
+        from Crypto import Random
+        return Random.new().read(key_size)
 
     def __newcipher(self, key):
         if self.__mode is None and self.__IV is None:
@@ -272,13 +296,13 @@ Where:
     # ugly hack to force __import__ to give us the end-path module
     module = __import__('Crypto.Cipher.'+ciphermodule, None, None, ['new'])
 
-    a = AllOrNothing(module)
+    x = AllOrNothing(module)
     print 'Original text:\n=========='
     print __doc__
     print '=========='
-    msgblocks = a.digest(__doc__)
+    msgblocks = x.digest(b(__doc__))
     print 'message blocks:'
-    for i, blk in enumerate(msgblocks):
+    for i, blk in zip(range(len(msgblocks)), msgblocks):
         # base64 adds a trailing newline
         print '    %3d' % i,
         if aslong:
@@ -287,9 +311,9 @@ Where:
             print base64.encodestring(blk)[:-1]
     #
     # get a new undigest-only object so there's no leakage
-    b = AllOrNothing(module)
-    text = b.undigest(msgblocks)
-    if text == __doc__:
+    y = AllOrNothing(module)
+    text = y.undigest(msgblocks)
+    if text == b(__doc__):
         print 'They match!'
     else:
         print 'They differ!'
