@@ -18,6 +18,8 @@
 """AtomPubClient provides CRUD ops. in line with the Atom Publishing Protocol.
 
 """
+from __future__ import print_function, unicode_literals
+import six
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
@@ -85,15 +87,15 @@ class AtomPubClient(object):
     # Modify the request based on the AtomPubClient settings and parameters
     # passed in to the request.
     http_request = self.modify_request(http_request)
-    if isinstance(uri, (str, unicode)):
+    if isinstance(uri, six.text_type):
       uri = atom.http_core.Uri.parse_uri(uri)
     if uri is not None:
       uri.modify_request(http_request)
-    if isinstance(method, (str, unicode)):
+    if isinstance(method, six.text_type):
       http_request.method = method
     # Any unrecognized arguments are assumed to be capable of modifying the
     # HTTP request.
-    for name, value in kwargs.iteritems():
+    for name, value in six.iteritems(kwargs):
       if value is not None:
         if hasattr(value, 'modify_request'):
           value.modify_request(http_request)
@@ -218,7 +220,7 @@ class CustomHeaders(object):
       An atom.http_core.HttpRequest() with the added custom headers.
     """
 
-    for name, value in self.headers.iteritems():
+    for name, value in six.iteritems(self.headers):
       if value is not None:
         http_request.headers[name] = value
     return http_request

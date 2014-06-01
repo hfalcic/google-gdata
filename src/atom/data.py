@@ -16,7 +16,7 @@
 
 
 # This module is used for version 2 of the Google Data APIs.
-
+from __future__ import print_function, unicode_literals
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 

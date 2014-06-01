@@ -20,6 +20,7 @@
   MockService: Exposes the publicly used methods of AtomService to provide
       a mock interface which can be used in unit tests.
 """
+from __future__ import print_function, unicode_literals
 
 import atom.service
 import pickle
@@ -168,7 +169,7 @@ class MockRequest(object):
 
   def ConcealSecrets(self, conceal_func):
     """Conceal secret data in this request."""
-    if self.extra_headers.has_key('Authorization'):
+    if 'Authorization' in self.extra_headers:
       self.extra_headers['Authorization'] = conceal_func(
         self.extra_headers['Authorization'])
 

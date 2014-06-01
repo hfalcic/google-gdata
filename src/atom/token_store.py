@@ -24,6 +24,8 @@ has expired or been revoked, it can remove the token from the store so that
 it will not be used in future requests.
 """
 
+from __future__ import print_function, unicode_literals
+import six
 
 __author__ = 'api.jscudder (Jeff Scudder)'
 
@@ -78,7 +80,7 @@ class TokenStore(object):
     """
     if url is None:
       return None
-    if isinstance(url, (str, unicode)):
+    if isinstance(url, six.text_type):
       url = atom.url.parse_url(url)
     if url in self._tokens:
       token = self._tokens[url]
@@ -86,7 +88,7 @@ class TokenStore(object):
         return token
       else:
         del self._tokens[url]
-    for scope, token in self._tokens.iteritems():
+    for scope, token in six.iteritems(self._tokens):
       if token.valid_for_scope(url):
         return token
     return atom.http_interface.GenericToken()
@@ -105,7 +107,7 @@ class TokenStore(object):
     """
     token_found = False
     scopes_to_delete = []
-    for scope, stored_token in self._tokens.iteritems():
+    for scope, stored_token in six.iteritems(self._tokens):
       if stored_token == token:
         scopes_to_delete.append(scope)
         token_found = True
