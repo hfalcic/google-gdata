@@ -278,7 +278,7 @@ Where:
     print '=========='
     msgblocks = a.digest(__doc__)
     print 'message blocks:'
-    for i, blk in map(None, range(len(msgblocks)), msgblocks):
+    for i, blk in enumerate(msgblocks):
         # base64 adds a trailing newline
         print '    %3d' % i,
         if aslong:

@@ -115,7 +115,7 @@ class Chaff:
         # chaffed.
         count = len(blocks) * self.__factor
         blocksper = range(self.__blocksper)
-        for i, wheat in map(None, range(len(blocks)), blocks):
+        for i, wheat in enumerate(blocks):
             # it shouldn't matter which of the n blocks we add chaff to, so for
             # ease of implementation, we'll just add them to the first count
             # blocks
@@ -190,7 +190,7 @@ likely to effect their Safety and Happiness.
 
     # put these into a form acceptable as input to the chaffing procedure
     source = []
-    m = map(None, range(len(blocks)), blocks, macs)
+    m = list(enumerate(zip(blocks, macs)))
     print m
     for i, data, mac in m:
         source.append((i, data, mac))
