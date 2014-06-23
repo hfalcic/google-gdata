@@ -20,16 +20,16 @@ from __future__ import print_function, unicode_literals
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
-
 import base64
 
+STRING_ENCODING = 'utf-8'
 
 class BasicAuth(object):
   """Sets the Authorization header as defined in RFC1945"""
 
   def __init__(self, user_id, password):
-    self.basic_cookie = base64.encodestring(
-        '%s:%s' % (user_id, password)).strip()
+    self.basic_cookie = base64.encodebytes(
+        '{}:{}'.format(user_id, password).encode(STRING_ENCODING)).strip()
 
   def modify_request(self, http_request):
     http_request.headers['Authorization'] = 'Basic %s' % self.basic_cookie
