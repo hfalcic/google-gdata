@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Original Copyright (C) 2006 Google Inc.
 # Refactored in 2009 to work for Google Analytics by Sal Uryasev at Juice Inc.

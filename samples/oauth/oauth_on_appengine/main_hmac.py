@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Copyright (C) 2009 Google Inc.
 #
@@ -62,7 +62,7 @@ class MainPage(webapp.RequestHandler):
       form_action = '/get_oauth_token'
       form_value = 'Give this website access to my Google Docs'
       revoke_token_link = None
-  
+
     template_values = {
       'form_action': form_action,
       'form_value': form_value,
@@ -115,7 +115,7 @@ class OAuthDance(webapp.RequestHandler):
     """Fetches a request token and redirects the user to the approval page."""
 
     self.session = Session()
-    
+
     if users.get_current_user():
       # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
       # be redirected back to after the user grants access on the approval page.
@@ -190,7 +190,7 @@ class RevokeToken(webapp.RequestHandler):
     gdocs.token_store.remove_all_tokens()
     self.redirect('/')
 
-  
+
 def main():
   application = webapp.WSGIApplication([('/', MainPage),
                                         ('/get_oauth_token', OAuthDance),

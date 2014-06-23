@@ -1,10 +1,4 @@
-from __future__ import absolute_import
-from __future__ import unicode_literals
-from future.builtins import str
-from future import standard_library
-standard_library.install_hooks()
-from future.builtins import object
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Copyright (C) 2007 - 2009 Google Inc.
 #
@@ -20,6 +14,12 @@ from future.builtins import object
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import str
+from future import standard_library
+standard_library.install_hooks()
+from future.builtins import object
 
 import cgi
 import math

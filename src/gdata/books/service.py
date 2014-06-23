@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """
     Extend gdata.service.GDataService to support authenticated CRUD ops on

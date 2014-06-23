@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """
 requires tlslite - http://trevp.net/tlslite/
