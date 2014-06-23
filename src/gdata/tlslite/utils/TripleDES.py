@@ -1,8 +1,11 @@
 """Abstract class for 3DES."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
-from compat import * #For True
+from .compat import * #For True
 
-class TripleDES:
+class TripleDES(object):
     def __init__(self, key, mode, IV, implementation):
         if len(key) != 24:
             raise ValueError()

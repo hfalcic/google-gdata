@@ -1,9 +1,12 @@
 """TLS Lite + Twisted."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
 from twisted.protocols.policies import ProtocolWrapper, WrappingFactory
 from twisted.python.failure import Failure
 
-from AsyncStateMachine import AsyncStateMachine
+from .AsyncStateMachine import AsyncStateMachine
 from gdata.tlslite.TLSConnection import TLSConnection
 from gdata.tlslite.errors import *
 
@@ -13,7 +16,7 @@ import errno
 
 #The TLSConnection is created around a "fake socket" that
 #plugs it into the underlying Twisted transport
-class _FakeSocket:
+class _FakeSocket(object):
     def __init__(self, wrapper):
         self.wrapper = wrapper
         self.data = ""
@@ -24,7 +27,7 @@ class _FakeSocket:
 
     def recv(self, numBytes):
         if self.data == "":
-            raise socket.error, (errno.EWOULDBLOCK, "")
+            raise socket.error(errno.EWOULDBLOCK, "")
         returnData = self.data[:numBytes]
         self.data = self.data[numBytes:]
         return returnData
@@ -134,7 +137,7 @@ class TLSTwistedProtocolWrapper(ProtocolWrapper, AsyncStateMachine):
     def connectionMade(self):
         try:
             ProtocolWrapper.connectionMade(self)
-        except TLSError, e:
+        except TLSError as e:
             self.connectionLost(Failure(e))
             ProtocolWrapper.loseConnection(self)
 
@@ -146,7 +149,7 @@ class TLSTwistedProtocolWrapper(ProtocolWrapper, AsyncStateMachine):
                 self.fakeSocket.data += data
                 while self.fakeSocket.data:
                     AsyncStateMachine.inReadEvent(self)
-        except TLSError, e:
+        except TLSError as e:
             self.connectionLost(Failure(e))
             ProtocolWrapper.loseConnection(self)
 

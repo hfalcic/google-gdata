@@ -1,8 +1,12 @@
 """Helper functions for XML.
 
 This module has misc. helper functions for working with XML DOM nodes."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import str
+from future.builtins import object
 
-from compat import *
+from .compat import *
 import os
 import re
 
@@ -26,7 +30,7 @@ else:
 def parseAndStripWhitespace(s):
     try:
         element = parseDocument(s).documentElement
-    except BaseException, e:
+    except BaseException as e:
         raise SyntaxError(str(e))
     stripWhitespace(element)
     return element
@@ -97,12 +101,12 @@ def getChild(element, index, name=None):
     return child
 
 def getChildIter(element, index):
-    class ChildIter:
+    class ChildIter(object):
         def __init__(self, element, index):
             self.element = element
             self.index = index
 
-        def next(self):
+        def __next__(self):
             if self.index < len(self.element.childNodes):
                 retVal = self.element.childNodes.item(self.index)
                 self.index += 1

@@ -1,8 +1,10 @@
 """
 A state machine for using TLS Lite with asynchronous I/O.
 """
+from __future__ import unicode_literals
+from future.builtins import object
 
-class AsyncStateMachine:
+class AsyncStateMachine(object):
     """
     This is an abstract class that's used to integrate TLS Lite with
     asyncore and Twisted.
@@ -154,7 +156,7 @@ class AsyncStateMachine:
 
     def _doHandshakeOp(self):
         try:
-            self.result = self.handshaker.next()
+            self.result = next(self.handshaker)
         except StopIteration:
             self.handshaker = None
             self.result = None
@@ -162,14 +164,14 @@ class AsyncStateMachine:
 
     def _doCloseOp(self):
         try:
-            self.result = self.closer.next()
+            self.result = next(self.closer)
         except StopIteration:
             self.closer = None
             self.result = None
             self.outCloseEvent()
 
     def _doReadOp(self):
-        self.result = self.reader.next()
+        self.result = next(self.reader)
         if not self.result in (0,1):
             readBuffer = self.result
             self.reader = None
@@ -178,7 +180,7 @@ class AsyncStateMachine:
 
     def _doWriteOp(self):
         try:
-            self.result = self.writer.next()
+            self.result = next(self.writer)
         except StopIteration:
             self.writer = None
             self.result = None

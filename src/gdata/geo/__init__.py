@@ -34,6 +34,7 @@ http://code.google.com/apis/picasaweb/reference.html#georss_reference
 Picasa Web Albums also accepts geographic-location data in two other formats:
 W3C format and plain-GeoRSS (without GML) format.
 """
+from __future__ import unicode_literals
 #
 #Over the wire, the Picasa Web Albums only accepts and sends the
 #elements mentioned above, but this module will let you seamlessly convert

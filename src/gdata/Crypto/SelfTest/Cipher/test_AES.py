@@ -23,10 +23,11 @@
 # ===================================================================
 
 """Self-test suite for Crypto.Cipher.AES"""
+from __future__ import absolute_import
 
 __revision__ = "$Id$"
 
-from common import dict     # For compatibility with Python 2.1 and 2.2
+from .common import dict     # For compatibility with Python 2.1 and 2.2
 from Crypto.Util.py3compat import *
 from binascii import hexlify
 
@@ -1422,7 +1423,7 @@ test_data = [
 
 def get_tests(config={}):
     from Crypto.Cipher import AES
-    from common import make_block_tests
+    from .common import make_block_tests
     return make_block_tests(AES, "AES", test_data)
 
 if __name__ == '__main__':

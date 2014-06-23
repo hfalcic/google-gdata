@@ -1,4 +1,5 @@
 """Toolkit for crypto and other stuff."""
+from __future__ import unicode_literals
 
 __all__ = ["AES",
            "ASN1Parser",

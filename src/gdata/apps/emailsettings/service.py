@@ -18,6 +18,8 @@
 
   EmailSettingsService: Set various email settings.
 """
+from __future__ import unicode_literals
+from future.builtins import str
 
 __author__ = 'google-apps-apis@googlegroups.com'
 

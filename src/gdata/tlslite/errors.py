@@ -3,8 +3,11 @@
 TLSAuthenticationError, TLSNoAuthenticationError, TLSAuthenticationTypeError,
 TLSFingerprintError, TLSAuthorizationError, TLSValidationError, TLSFaultError
 """
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import str
 
-from constants import AlertDescription, AlertLevel
+from .constants import AlertDescription, AlertLevel
 
 class TLSError(Exception):
     """Base class for all TLS Lite exceptions."""

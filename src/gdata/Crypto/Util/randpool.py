@@ -1,3 +1,4 @@
+from future.builtins import object
 #
 #  randpool.py : Cryptographically strong random number generation
 #
@@ -30,7 +31,7 @@ from Crypto.pct_warnings import RandomPool_DeprecationWarning
 import Crypto.Random
 import warnings
 
-class RandomPool:
+class RandomPool(object):
     """Deprecated.  Use Random.new() instead.
 
     See http://www.pycrypto.org/randpool-broken

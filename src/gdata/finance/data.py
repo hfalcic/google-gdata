@@ -16,6 +16,7 @@
 
 
 """Contains the data classes of the Google Finance Portfolio Data API"""
+from __future__ import unicode_literals
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'

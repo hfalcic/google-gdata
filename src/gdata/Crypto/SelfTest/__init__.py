@@ -27,12 +27,14 @@
 These tests should perform quickly and can ideally be used every time an
 application runs.
 """
+from future import standard_library
+standard_library.install_hooks()
 
 __revision__ = "$Id$"
 
 import sys
 import unittest
-from StringIO import StringIO
+from io import StringIO
 
 class SelfTestError(Exception):
     def __init__(self, message, result):

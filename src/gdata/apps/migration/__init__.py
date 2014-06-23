@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Contains objects used with Google Apps."""
+from __future__ import unicode_literals
+from future.builtins import object
 
 __author__ = 'google-apps-apis@googlegroups.com'
 

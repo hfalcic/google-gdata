@@ -104,6 +104,7 @@ verification, encryption, and decryption.
 .. _CDH: http://en.wikipedia.org/wiki/Computational_Diffie%E2%80%93Hellman_assumption
 .. _ECRYPT: http://www.ecrypt.eu.org/documents/D.SPA.17.pdf
 """
+from future.builtins import range
 
 __revision__ = "$Id$"
 

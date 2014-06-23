@@ -23,6 +23,7 @@
 # ===================================================================
 
 """Self-test suite for Crypto.Hash.SHA512"""
+from __future__ import absolute_import
 
 __revision__ = "$Id$"
 
@@ -47,7 +48,7 @@ test_data = [
 
 def get_tests(config={}):
     from Crypto.Hash import SHA512
-    from common import make_hash_tests
+    from .common import make_hash_tests
     return make_hash_tests(SHA512, "SHA512", test_data,
         digest_size=64,
         oid="\x06\x09\x60\x86\x48\x01\x65\x03\x04\x02\x03")

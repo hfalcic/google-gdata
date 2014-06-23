@@ -1,9 +1,13 @@
 """Class for parsing ASN.1"""
-from compat import *
-from codec import *
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import range
+from future.builtins import object
+from .compat import *
+from .codec import *
 
 #Takes a byte array which has a DER TLV field at its head
-class ASN1Parser:
+class ASN1Parser(object):
     def __init__(self, bytes):
         p = Parser(bytes)
         p.get(1) #skip Type

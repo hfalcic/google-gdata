@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Contains extensions to Atom objects used with Google Webmaster Tools."""
+from __future__ import unicode_literals
 
 
 __author__ = 'livibetter (Yu-Jie Lin)'

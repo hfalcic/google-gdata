@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Contains the data classes of the Google Access Control List (ACL) Extension"""
+from __future__ import unicode_literals
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'

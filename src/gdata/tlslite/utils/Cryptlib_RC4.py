@@ -1,7 +1,9 @@
 """Cryptlib RC4 implementation."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from cryptomath import *
-from RC4 import RC4
+from .cryptomath import *
+from .RC4 import RC4
 
 if cryptlibpyLoaded:
 

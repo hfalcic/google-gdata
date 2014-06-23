@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Data model classes for the Organization Unit Provisioning API."""
+from __future__ import unicode_literals
+from future.builtins import str
 
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'

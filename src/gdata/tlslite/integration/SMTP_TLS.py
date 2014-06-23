@@ -1,4 +1,5 @@
 """TLS Lite + smtplib."""
+from __future__ import unicode_literals
 
 from smtplib import SMTP
 from gdata.tlslite.TLSConnection import TLSConnection

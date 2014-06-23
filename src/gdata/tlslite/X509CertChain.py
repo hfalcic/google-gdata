@@ -1,8 +1,12 @@
 """Class representing an X.509 certificate chain."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import zip
+from future.builtins import object
 
-from utils import cryptomath
+from .utils import cryptomath
 
-class X509CertChain:
+class X509CertChain(object):
     """This class represents a chain of X.509 certificates.
 
     @type x509List: list
@@ -150,7 +154,7 @@ class X509CertChain:
                 lastName = array.array('B', [0] * length)
                 cryptlib_py.cryptGetAttributeString(lastC, name, lastName)
                 lastName = lastName.tostring()
-            except cryptlib_py.CryptException, e:
+            except cryptlib_py.CryptException as e:
                 if e[0] == cryptlib_py.CRYPT_ERROR_NOTFOUND:
                     lastName = None
             try:
@@ -158,7 +162,7 @@ class X509CertChain:
                 rootName = array.array('B', [0] * length)
                 cryptlib_py.cryptGetAttributeString(rootC, name, rootName)
                 rootName = rootName.tostring()
-            except cryptlib_py.CryptException, e:
+            except cryptlib_py.CryptException as e:
                 if e[0] == cryptlib_py.CRYPT_ERROR_NOTFOUND:
                     rootName = None
 

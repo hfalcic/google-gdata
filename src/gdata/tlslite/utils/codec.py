@@ -1,8 +1,13 @@
 """Classes for reading/writing binary data (such as TLS records)."""
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import range
+from future.builtins import object
 
-from compat import *
+from .compat import *
 
-class Writer:
+class Writer(object):
     def __init__(self, length=0):
         #If length is zero, then this is just a "trial run" to determine length
         self.index = 0
@@ -33,7 +38,7 @@ class Writer:
             self.index += lengthLength + (len(seq)*length)
 
 
-class Parser:
+class Parser(object):
     def __init__(self, bytes):
         self.bytes = bytes
         self.index = 0

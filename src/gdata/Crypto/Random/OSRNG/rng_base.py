@@ -1,3 +1,4 @@
+from future.builtins import object
 #
 #  Random/OSRNG/rng_base.py : Base class for OSRNG
 #
@@ -67,7 +68,7 @@ class BaseRNG(object):
         """Return N bytes from the RNG."""
         if self.closed:
             raise ValueError("I/O operation on closed file")
-        if not isinstance(N, (long, int)):
+        if not isinstance(N, int):
             raise TypeError("an integer is required")
         if N < 0:
             raise ValueError("cannot read to end of infinite stream")

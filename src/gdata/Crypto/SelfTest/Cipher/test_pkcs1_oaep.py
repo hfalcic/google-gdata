@@ -1,3 +1,5 @@
+from future.builtins import range
+from future.builtins import object
 # -*- coding: utf-8 -*-
 #
 #  SelfTest/Cipher/test_pkcs1_oaep.py: Self-test for PKCS#1 OAEP encryption
@@ -269,11 +271,11 @@ class PKCS1_OAEP_Tests(unittest.TestCase):
                 # Verify encryption using all test vectors
                 for test in self._testData:
                         # Build the key
-                        comps = [ long(rws(test[0][x]),16) for x in ('n','e') ]
+                        comps = [ int(rws(test[0][x]),16) for x in ('n','e') ]
                         key = RSA.construct(comps)
                         # RNG that takes its random numbers from a pool given
                         # at initialization
-                        class randGen:
+                        class randGen(object):
                             def __init__(self, data):
                                 self.data = data
                                 self.idx = 0
@@ -297,7 +299,7 @@ class PKCS1_OAEP_Tests(unittest.TestCase):
                 # Verify decryption using all test vectors
                 for test in self._testData:
                         # Build the key
-                        comps = [ long(rws(test[0][x]),16) for x in ('n','e','d') ]
+                        comps = [ int(rws(test[0][x]),16) for x in ('n','e','d') ]
                         key = RSA.construct(comps)
                         # The real test
                         cipher = PKCS.new(key, test[4])
@@ -312,7 +314,7 @@ class PKCS1_OAEP_Tests(unittest.TestCase):
 
         def testEncryptDecrypt1(self):
                 # Encrypt/Decrypt messages of length [0..128-2*20-2]
-                for pt_len in xrange(0,128-2*20-2):
+                for pt_len in range(0,128-2*20-2):
                     pt = self.rng(pt_len)
                     ct = PKCS.encrypt(pt, self.key1024)
                     pt2 = PKCS.decrypt(ct, self.key1024)

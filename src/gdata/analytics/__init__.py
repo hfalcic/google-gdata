@@ -21,6 +21,7 @@
 # to CLIENT_LOGIN_SCOPES in the gdata/service.py file
 
 """Contains extensions to Atom objects used with Google Analytics."""
+from __future__ import unicode_literals
 
 __author__ = 'api.suryasev (Sal Uryasev)'
 

@@ -23,6 +23,7 @@
 
   HealthProfileListQuery: Queries the Google Health Profile list feed.
 """
+from __future__ import unicode_literals
 
 __author__ = 'api.eric@google.com (Eric Bidelman)'
 

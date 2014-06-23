@@ -19,6 +19,9 @@
 
   Extends Atom classes to add Google Data specific elements.
 """
+from __future__ import unicode_literals
+from future.builtins import str
+from future.builtins import object
 
 
 __author__ = 'j.s@google.com (Jeffrey Scudder)'

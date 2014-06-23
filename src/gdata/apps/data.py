@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Data model classes for the Provisioning API."""
+from __future__ import unicode_literals
 
 
 __author__ = 'Shraddha Gupta shraddhag@google.com>'

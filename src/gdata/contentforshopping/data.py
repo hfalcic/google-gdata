@@ -16,6 +16,7 @@
 
 
 """GData definitions for Content API for Shopping"""
+from __future__ import unicode_literals
 
 
 __author__ = 'afshar (Ali Afshar), dhermes (Daniel Hermes)'

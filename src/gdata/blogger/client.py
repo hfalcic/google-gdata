@@ -20,6 +20,7 @@
 For documentation on the Blogger API, see:
 http://code.google.com/apis/blogger/
 """
+from __future__ import unicode_literals
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -145,7 +146,7 @@ class BloggerClient(gdata.client.GDClient):
   Update = update
 
   def delete(self, entry_or_uri, auth_token=None, **kwargs):
-    if isinstance(entry_or_uri, (str, unicode, atom.http_core.Uri)):
+    if isinstance(entry_or_uri, (str, atom.http_core.Uri)):
       return gdata.client.GDClient.delete(self, entry_or_uri,
                                           auth_token=auth_token, **kwargs)
     # The Blogger API does not currently support ETags, so for now remove

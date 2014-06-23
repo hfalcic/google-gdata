@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Streamlines requests to the Google Analytics APIs."""
+from __future__ import unicode_literals
 
 __author__ = 'api.nickm@google.com (Nick Mihailovski)'
 

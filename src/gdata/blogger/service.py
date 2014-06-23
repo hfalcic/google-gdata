@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Classes to interact with the Blogger server."""
+from __future__ import unicode_literals
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 

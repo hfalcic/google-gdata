@@ -52,6 +52,7 @@ As an example, encryption can be done as follows:
 
 :undocumented: __revision__, __package__
 """
+from future.builtins import range
 
 __revision__ = "$Id$"
 
@@ -120,4 +121,4 @@ MODE_OPENPGP = 7
 #: Size of a data block (in bytes)
 block_size = 8
 #: Size of a key (in bytes)
-key_size = xrange(5,16+1)
+key_size = range(5,16+1)

@@ -23,12 +23,15 @@
                          URL arguments (represented as strings). This is a
                          utility function used in CRUD operations.
 """
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'alainv (Alain Vongsouvanh)'
 
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gdata.client
 import gdata.calendar.data
 import atom.data

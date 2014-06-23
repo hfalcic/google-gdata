@@ -142,7 +142,7 @@ class ElGamalTest(unittest.TestCase):
         to either integers or byte strings."""
         key_comps = 'p','g','y','x'
         tv2 = {}
-        for c in tv.keys():
+        for c in list(tv.keys()):
             tv2[c] = a2b_hex(tv[c])
             if as_longs or c in key_comps or c in ('sig1','sig2'):
                 tv2[c] = bytes_to_long(tv2[c])
@@ -187,17 +187,17 @@ class ElGamalTest(unittest.TestCase):
     def _exercise_primitive(self, elgObj):
         # Test encryption/decryption
         plaintext = b("Test")
-        ciphertext = elgObj.encrypt(plaintext, 123456789L)
+        ciphertext = elgObj.encrypt(plaintext, 123456789)
         plaintextP = elgObj.decrypt(ciphertext)
         self.assertEquals(plaintext, plaintextP)
 
         # Test signature/verification
-        signature = elgObj.sign(plaintext, 987654321L)
+        signature = elgObj.sign(plaintext, 987654321)
         elgObj.verify(plaintext, signature)
 
     def _exercise_public_primitive(self, elgObj):
         plaintext = b("Test")
-        ciphertext = elgObj.encrypt(plaintext, 123456789L)
+        ciphertext = elgObj.encrypt(plaintext, 123456789)
 
 def get_tests(config={}):
     tests = []

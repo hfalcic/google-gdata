@@ -1,3 +1,6 @@
+from __future__ import absolute_import
+from future.builtins import range
+from future.builtins import object
 # -*- coding: ascii -*-
 #
 #  FortunaAccumulator.py : Fortuna's internal accumulator
@@ -34,9 +37,9 @@ import time
 import warnings
 
 from Crypto.pct_warnings import ClockRewindWarning
-import SHAd256
+from . import SHAd256
 
-import FortunaGenerator
+from . import FortunaGenerator
 
 class FortunaPool(object):
     """Fortuna pool type
@@ -89,7 +92,7 @@ def which_pools(r):
             retval.append(i)
         else:
             break   # optimization.  once this fails, it always fails
-        mask = (mask << 1) | 1L
+        mask = (mask << 1) | 1
     return retval
 
 class FortunaAccumulator(object):

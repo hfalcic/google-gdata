@@ -16,6 +16,7 @@
 
 
 """Contains extensions to Atom objects used by Google Codesearch"""
+from __future__ import unicode_literals
 
 __author__ = 'Benoit Chesneau'
 

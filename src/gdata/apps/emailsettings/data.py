@@ -15,6 +15,9 @@
 # limitations under the License.
 
 """Data model classes for the Email Settings API."""
+from __future__ import unicode_literals
+from future.builtins import str
+from future.builtins import range
 
 
 __author__ = 'Claudio Cherubino <ccherubino@google.com>'

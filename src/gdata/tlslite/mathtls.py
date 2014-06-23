@@ -1,7 +1,14 @@
 """Miscellaneous helper functions."""
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import chr
+from future.builtins import hex
+from future.builtins import range
+from future.builtins import object
 
-from utils.compat import *
-from utils.cryptomath import *
+from .utils.compat import *
+from .utils.cryptomath import *
 
 import hmac
 import md5
@@ -99,7 +106,7 @@ MAC_SSL
 Modified from Python HMAC by Trevor
 """
 
-class MAC_SSL:
+class MAC_SSL(object):
     """MAC_SSL class.
 
     This supports the API for Cryptographic Hash Functions (PEP 247).

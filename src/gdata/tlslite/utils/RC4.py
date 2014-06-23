@@ -1,8 +1,11 @@
 """Abstract class for RC4."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
-from compat import * #For False
+from .compat import * #For False
 
-class RC4:
+class RC4(object):
     def __init__(self, keyBytes, implementation):
         if len(keyBytes) < 16 or len(keyBytes) > 256:
             raise ValueError()

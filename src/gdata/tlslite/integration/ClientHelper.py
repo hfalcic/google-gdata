@@ -2,10 +2,12 @@
 A helper class for using TLS Lite with stdlib clients
 (httplib, xmlrpclib, imaplib, poplib).
 """
+from __future__ import unicode_literals
+from future.builtins import object
 
 from gdata.tlslite.Checker import Checker
 
-class ClientHelper:
+class ClientHelper(object):
     """This is a helper class used to integrate TLS Lite with various
     TLS clients (e.g. poplib, smtplib, httplib, etc.)"""
 

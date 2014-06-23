@@ -1,6 +1,10 @@
 """Class returned by TLSConnection.makefile()."""
+from __future__ import unicode_literals
+from future.builtins import str
+from future.builtins import map
+from future.builtins import object
 
-class FileObject:
+class FileObject(object):
     """This class provides a file object interface to a
     L{tlslite.TLSConnection.TLSConnection}.
 
@@ -70,7 +74,7 @@ class FileObject:
     def writelines(self, list):
         # XXX We could do better here for very long lists
         # XXX Should really reject non-string non-buffers
-        self._wbuf.extend(filter(None, map(str, list)))
+        self._wbuf.extend([_f for _f in map(str, list) if _f])
         if (self._wbufsize <= 1 or
             self._get_wbuf_len() >= self._wbufsize):
             self.flush()
@@ -213,7 +217,7 @@ class FileObject:
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         line = self.readline()
         if not line:
             raise StopIteration

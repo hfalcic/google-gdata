@@ -20,6 +20,8 @@
   libraries to version 2.0 of the GDATA library.
 
 """
+from __future__ import unicode_literals
+from future.builtins import str
 
 # __author__ = 's.@google.com (John Skidgel)'
 

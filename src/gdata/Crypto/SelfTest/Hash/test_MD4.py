@@ -23,6 +23,7 @@
 # ===================================================================
 
 """Self-test suite for Crypto.Hash.MD4"""
+from __future__ import absolute_import
 
 __revision__ = "$Id$"
 
@@ -51,7 +52,7 @@ test_data = [
 
 def get_tests(config={}):
     from Crypto.Hash import MD4
-    from common import make_hash_tests
+    from .common import make_hash_tests
     return make_hash_tests(MD4, "MD4", test_data,
         digest_size=16,
         oid="\x06\x08\x2a\x86\x48\x86\xf7\x0d\x02\x04")

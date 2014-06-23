@@ -1,3 +1,4 @@
+from future.builtins import range
 #
 # Test script for Crypto.Protocol.AllOrNothing
 #

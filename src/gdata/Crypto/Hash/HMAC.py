@@ -55,6 +55,8 @@ An example of possible usage is the following:
 .. _RFC2104: http://www.ietf.org/rfc/rfc2104.txt
 .. _FIPS-198: http://csrc.nist.gov/publications/fips/fips198/fips-198a.pdf
 """
+from __future__ import absolute_import
+from future.builtins import object
 
 # This is just a copy of the Python 2.2 HMAC module, modified to work when
 # used on versions of Python before 2.2.
@@ -71,7 +73,7 @@ from Crypto.Util.py3compat import *
 #: hashing module used.
 digest_size = None
 
-class HMAC:
+class HMAC(object):
     """Class that implements HMAC"""
 
     #: The size of the authentication tag produced by the MAC.
@@ -98,7 +100,7 @@ class HMAC:
             A hash module or object instantiated from `Crypto.Hash`
         """
         if digestmod is None:
-            import MD5
+            from . import MD5
             digestmod = MD5
 
         self.digestmod = digestmod

@@ -1,3 +1,6 @@
+from __future__ import print_function
+from future.builtins import range
+from future.builtins import object
 # -*- coding: utf-8 -*-
 #
 #  SelfTest/Cipher/test_pkcs1_15.py: Self-test for PKCS#1 v1.5 encryption
@@ -41,7 +44,7 @@ def t2b(t):
     """Convert a text string with bytes in hex form to a byte string"""
     clean = b(rws(t))
     if len(clean)%2 == 1:
-        print clean
+        print(clean)
         raise ValueError("Even number of characters expected")
     return a2b_hex(clean)
 
@@ -108,7 +111,7 @@ HKukWBcq9f/UOmS0oEhai/6g+Uf7VHJdWaeO5LzuvwU=
                         key = RSA.importKey(test[0])
                         # RNG that takes its random numbers from a pool given
                         # at initialization
-                        class randGen:
+                        class randGen(object):
                             def __init__(self, data):
                                 self.data = data
                                 self.idx = 0
@@ -154,7 +157,7 @@ HKukWBcq9f/UOmS0oEhai/6g+Uf7VHJdWaeO5LzuvwU=
         def testEncryptVerify1(self):
                 # Encrypt/Verify messages of length [0..RSAlen-11]
                 # and therefore padding [8..117]
-                for pt_len in xrange(0,128-11+1):
+                for pt_len in range(0,128-11+1):
                     pt = self.rng(pt_len)
                     cipher = PKCS.new(self.key1024)
                     ct = cipher.encrypt(pt)

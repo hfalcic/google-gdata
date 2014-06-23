@@ -1,17 +1,21 @@
 """Classes representing TLS messages."""
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
-from utils.compat import *
-from utils.cryptomath import *
-from errors import *
-from utils.codec import *
-from constants import *
-from X509 import X509
-from X509CertChain import X509CertChain
+from .utils.compat import *
+from .utils.cryptomath import *
+from .errors import *
+from .utils.codec import *
+from .constants import *
+from .X509 import X509
+from .X509CertChain import X509CertChain
 
 import sha
 import md5
 
-class RecordHeader3:
+class RecordHeader3(object):
     def __init__(self):
         self.type = 0
         self.version = (0,0)
@@ -39,7 +43,7 @@ class RecordHeader3:
         self.ssl2 = False
         return self
 
-class RecordHeader2:
+class RecordHeader2(object):
     def __init__(self):
         self.type = 0
         self.version = (0,0)
@@ -56,7 +60,7 @@ class RecordHeader2:
         return self
 
 
-class Msg:
+class Msg(object):
     def preWrite(self, trial):
         if trial:
             w = Writer()
@@ -364,10 +368,10 @@ class ServerKeyExchange(HandshakeMsg):
     def __init__(self, cipherSuite):
         self.cipherSuite = cipherSuite
         self.contentType = ContentType.handshake
-        self.srp_N = 0L
-        self.srp_g = 0L
+        self.srp_N = 0
+        self.srp_g = 0
         self.srp_s = createByteArraySequence([])
-        self.srp_B = 0L
+        self.srp_B = 0
         self.signature = createByteArraySequence([])
 
     def createSRP(self, srp_N, srp_g, srp_s, srp_B):

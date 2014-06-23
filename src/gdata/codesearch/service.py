@@ -17,6 +17,7 @@
 
 """CodesearchService extends GDataService to streamline Google Codesearch
 operations"""
+from __future__ import unicode_literals
 
 
 __author__ = 'Benoit Chesneau'

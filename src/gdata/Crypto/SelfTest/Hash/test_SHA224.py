@@ -23,6 +23,7 @@
 # ===================================================================
 
 """Self-test suite for Crypto.Hash.SHA224"""
+from __future__ import absolute_import
 
 __revision__ = "$Id$"
 
@@ -52,7 +53,7 @@ test_data = [
 
 def get_tests(config={}):
     from Crypto.Hash import SHA224
-    from common import make_hash_tests
+    from .common import make_hash_tests
     return make_hash_tests(SHA224, "SHA224", test_data,
         digest_size=28,
         oid='\x06\x09\x60\x86\x48\x01\x65\x03\x04\x02\x04')

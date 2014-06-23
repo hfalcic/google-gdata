@@ -18,6 +18,8 @@
 
   OrganizationService: Provides methods to manage organization unit and organization user.
 """
+from __future__ import unicode_literals
+from future.builtins import str
 
 __author__ = 'Alexandre Vivien (alex@simplecode.fr)'
 

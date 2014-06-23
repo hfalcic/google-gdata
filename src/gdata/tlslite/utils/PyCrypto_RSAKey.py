@@ -1,9 +1,11 @@
 """PyCrypto RSA implementation."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from cryptomath import *
+from .cryptomath import *
 
-from RSAKey import *
-from Python_RSAKey import Python_RSAKey
+from .RSAKey import *
+from .Python_RSAKey import Python_RSAKey
 
 if pycryptoLoaded:
 

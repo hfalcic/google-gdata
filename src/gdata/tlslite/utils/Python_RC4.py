@@ -1,7 +1,10 @@
 """Pure-Python RC4 implementation."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import range
 
-from RC4 import RC4
-from cryptomath import *
+from .RC4 import RC4
+from .cryptomath import *
 
 def new(key):
     return Python_RC4(key)

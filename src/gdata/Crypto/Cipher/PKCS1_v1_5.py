@@ -66,6 +66,8 @@ the RSA key:
 .. __: http://www.ietf.org/rfc/rfc3447.txt
 .. __: http://www.rsa.com/rsalabs/node.asp?id=2125.
 """
+from future.builtins import map
+from future.builtins import object
 
 __revision__ = "$Id$"
 __all__ = [ 'new', 'PKCS115_Cipher' ]
@@ -74,7 +76,7 @@ from Crypto.Util.number import ceil_div
 from Crypto.Util.py3compat import *
 import Crypto.Util.number
 
-class PKCS115_Cipher:
+class PKCS115_Cipher(object):
     """This cipher can perform PKCS#1 v1.5 RSA encryption or decryption."""
 
     def __init__(self, key):
@@ -127,12 +129,12 @@ class PKCS115_Cipher:
         if mLen > k-11:
             raise ValueError("Plaintext is too long.")
         # Step 2a
-        class nonZeroRandByte:
+        class nonZeroRandByte(object):
             def __init__(self, rf): self.rf=rf
             def __call__(self, c):
                 while bord(c)==0x00: c=self.rf(1)[0]
                 return c
-        ps = tobytes(map(nonZeroRandByte(randFunc), randFunc(k-mLen-3)))
+        ps = tobytes(list(map(nonZeroRandByte(randFunc), randFunc(k-mLen-3))))
         # Step 2b
         em = b('\x00\x02') + ps + bchr(0x00) + message
         # Step 3a (OS2IP), step 3b (RSAEP), part of step 3c (I2OSP)

@@ -60,12 +60,14 @@ As an example, encryption can be done as follows:
 
 :undocumented: __revision__, __package__
 """
+from future.builtins import range
+from future.builtins import object
 
 __revision__ = "$Id$"
 
 from Crypto.Cipher import _ARC4
 
-class ARC4Cipher:
+class ARC4Cipher(object):
     """ARC4 cipher object"""
 
 
@@ -116,5 +118,5 @@ def new(key, *args, **kwargs):
 #: Size of a data block (in bytes)
 block_size = 1
 #: Size of a key (in bytes)
-key_size = xrange(1,256+1)
+key_size = range(1,256+1)
 

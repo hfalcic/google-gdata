@@ -1,3 +1,4 @@
+from future.builtins import object
 # -*- coding: utf-8 -*-
 #
 # ===================================================================
@@ -20,7 +21,7 @@
 
 from binascii import hexlify
 
-class HashAlgo:
+class HashAlgo(object):
     """A generic class for an abstract cryptographic hash algorithm.
     
     :undocumented: block_size

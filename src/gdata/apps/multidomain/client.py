@@ -21,12 +21,15 @@ with the Google Multidomain Provisioning API.  These interactions include the
 ability to create, retrieve, update and delete users and aliases in multiple
 domains.
 """
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'Claudio Cherubino <ccherubino@google.com>'
 
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gdata.apps.multidomain.data
 import gdata.client
 
@@ -97,7 +100,7 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
     if email:
       uri += '/' + email
     if params:
-      uri += '?' + urllib.urlencode(params)
+      uri += '?' + urllib.parse.urlencode(params)
     return uri
 
   MakeMultidomainProvisioningUri = make_multidomain_provisioning_uri

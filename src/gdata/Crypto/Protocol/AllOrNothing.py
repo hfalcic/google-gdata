@@ -41,6 +41,12 @@ Ronald L. Rivest.  "All-Or-Nothing Encryption and The Package Transform"
 http://theory.lcs.mit.edu/~rivest/fusion.pdf
 
 """
+from __future__ import print_function
+from future.builtins import zip
+from future.builtins import map
+from future.builtins import range
+from future.builtins import object
+from functools import reduce
 
 __revision__ = "$Id$"
 
@@ -57,7 +63,7 @@ def isInt(x):
         return 0
     return 1
 
-class AllOrNothing:
+class AllOrNothing(object):
     """Class implementing the All-or-Nothing package transform.
 
     Methods for subclassing:
@@ -186,11 +192,11 @@ class AllOrNothing:
         # better have at least 2 blocks, for the padbytes package and the hash
         # block accumulator
         if len(blocks) < 2:
-            raise ValueError, "List must be at least length 2."
+            raise ValueError("List must be at least length 2.")
 
         # blocks is a list of strings.  We need to deal with them as long
         # integers
-        blocks = map(bytes_to_long, blocks)
+        blocks = list(map(bytes_to_long, blocks))
 
         # Calculate the well-known key, to which the hash blocks are
         # encrypted, and create the hash cipher.
@@ -271,15 +277,15 @@ Where:
 
     def usage(code, msg=None):
         if msg:
-            print msg
-        print usagemsg % {'program': sys.argv[0],
-                          'ciphermodule': ciphermodule}
+            print(msg)
+        print(usagemsg % {'program': sys.argv[0],
+                          'ciphermodule': ciphermodule})
         sys.exit(code)
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
                                    'c:l', ['cipher=', 'aslong'])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     if args:
@@ -297,23 +303,23 @@ Where:
     module = __import__('Crypto.Cipher.'+ciphermodule, None, None, ['new'])
 
     x = AllOrNothing(module)
-    print 'Original text:\n=========='
-    print __doc__
-    print '=========='
+    print('Original text:\n==========')
+    print(__doc__)
+    print('==========')
     msgblocks = x.digest(b(__doc__))
-    print 'message blocks:'
-    for i, blk in zip(range(len(msgblocks)), msgblocks):
+    print('message blocks:')
+    for i, blk in zip(list(range(len(msgblocks))), msgblocks):
         # base64 adds a trailing newline
-        print '    %3d' % i,
+        print('    %3d' % i, end=' ')
         if aslong:
-            print bytes_to_long(blk)
+            print(bytes_to_long(blk))
         else:
-            print base64.encodestring(blk)[:-1]
+            print(base64.encodestring(blk)[:-1])
     #
     # get a new undigest-only object so there's no leakage
     y = AllOrNothing(module)
     text = y.undigest(msgblocks)
     if text == b(__doc__):
-        print 'They match!'
+        print('They match!')
     else:
-        print 'They differ!'
+        print('They differ!')

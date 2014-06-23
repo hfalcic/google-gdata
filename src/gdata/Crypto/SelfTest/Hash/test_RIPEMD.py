@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # -*- coding: utf-8 -*-
 #
 #  SelfTest/Hash/test_RIPEMD.py: Self-test for the RIPEMD-160 hash function
@@ -60,7 +61,7 @@ test_data = [
 
 def get_tests(config={}):
     from Crypto.Hash import RIPEMD
-    from common import make_hash_tests
+    from .common import make_hash_tests
     return make_hash_tests(RIPEMD, "RIPEMD", test_data,
         digest_size=20,
         oid="\x06\x05\x2b\x24\x03\02\x01")

@@ -37,11 +37,11 @@ def ceil_shift(n, b):
     This is done by right-shifting n by b bits and incrementing the result by 1
     if any '1' bits were shifted out.
     """
-    if not isinstance(n, (int, long)) or not isinstance(b, (int, long)):
+    if not isinstance(n, int) or not isinstance(b, int):
         raise TypeError("unsupported operand type(s): %r and %r" % (type(n).__name__, type(b).__name__))
 
     assert n >= 0 and b >= 0    # I haven't tested or even thought about negative values
-    mask = (1L << b) - 1
+    mask = (1 << b) - 1
     if n & mask:
         return (n >> b) + 1
     else:
@@ -50,7 +50,7 @@ def ceil_shift(n, b):
 def ceil_div(a, b):
     """Return ceil(a / b) without performing any floating-point operations."""
 
-    if not isinstance(a, (int, long)) or not isinstance(b, (int, long)):
+    if not isinstance(a, int) or not isinstance(b, int):
         raise TypeError("unsupported operand type(s): %r and %r" % (type(a).__name__, type(b).__name__))
 
     (q, r) = divmod(a, b)
@@ -60,7 +60,7 @@ def ceil_div(a, b):
         return q
 
 def floor_div(a, b):
-    if not isinstance(a, (int, long)) or not isinstance(b, (int, long)):
+    if not isinstance(a, int) or not isinstance(b, int):
         raise TypeError("unsupported operand type(s): %r and %r" % (type(a).__name__, type(b).__name__))
 
     (q, r) = divmod(a, b)
@@ -72,10 +72,10 @@ def exact_log2(num):
     If no such integer exists, this function raises ValueError.
     """
 
-    if not isinstance(num, (int, long)):
+    if not isinstance(num, int):
         raise TypeError("unsupported operand type: %r" % (type(num).__name__,))
 
-    n = long(num)
+    n = int(num)
     if n <= 0:
         raise ValueError("cannot compute logarithm of non-positive number")
 
@@ -87,7 +87,7 @@ def exact_log2(num):
         n >>= 1
     i -= 1
 
-    assert num == (1L << i)
+    assert num == (1 << i)
     return i
 
 def exact_div(p, d, allow_divzero=False):
@@ -101,7 +101,7 @@ def exact_div(p, d, allow_divzero=False):
     unless allow_divzero is true (default: False).
     """
 
-    if not isinstance(p, (int, long)) or not isinstance(d, (int, long)):
+    if not isinstance(p, int) or not isinstance(d, int):
         raise TypeError("unsupported operand type(s): %r and %r" % (type(p).__name__, type(d).__name__))
 
     if d == 0 and allow_divzero:

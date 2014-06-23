@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Contains objects used with Google Apps."""
+from __future__ import unicode_literals
 
 __author__ = 'tmatsuo@sios.com (Takashi MATSUO)'
 

@@ -42,6 +42,8 @@ exif:time
 [2]: http://en.wikipedia.org/wiki/Exif
 [3]: http://code.google.com/apis/picasaweb/reference.html#exif_reference
 """
+from __future__ import division
+from __future__ import unicode_literals
 
 
 __author__ = u'havard@gulldahl.no'# (Håvard Gulldahl)' #BUG: pydoc chokes on non-ascii chars in __author__

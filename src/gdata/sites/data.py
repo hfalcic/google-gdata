@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Data model classes for parsing and generating XML for the Sites Data API."""
+from __future__ import unicode_literals
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 

@@ -29,12 +29,14 @@ Do not use it for real applications!
 
 :undocumented: __revision__, __package__
 """
+from future.builtins import range
+from future.builtins import object
 
 __revision__ = "$Id$"
 
 from Crypto.Cipher import _XOR
 
-class XORCipher:
+class XORCipher(object):
     """XOR cipher object"""
 
     def __init__(self, key, *args, **kwargs):
@@ -82,5 +84,5 @@ def new(key, *args, **kwargs):
 #: Size of a data block (in bytes)
 block_size = 1
 #: Size of a key (in bytes)
-key_size = xrange(1,32+1)
+key_size = range(1,32+1)
 

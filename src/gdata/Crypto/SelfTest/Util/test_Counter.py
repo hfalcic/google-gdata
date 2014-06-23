@@ -23,6 +23,7 @@
 # ===================================================================
 
 """Self-tests for Crypto.Util.Counter"""
+from future.builtins import range
 
 __revision__ = "$Id$"
 
@@ -75,7 +76,7 @@ class CounterTests(unittest.TestCase):
         self.assertEqual(b("\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01"), c())
         self.assertEqual(2, c.next_value())
         self.assertEqual(b("\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02"), c())
-        for i in xrange(3, 256):
+        for i in range(3, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(b("\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00")+bchr(i), c())
         self.assertEqual(256, c.next_value())
@@ -88,7 +89,7 @@ class CounterTests(unittest.TestCase):
         self.assertEqual(b("\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"), c())
         self.assertEqual(2, c.next_value())
         self.assertEqual(b("\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"), c())
-        for i in xrange(3, 256):
+        for i in range(3, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i)+b("\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"), c())
         self.assertEqual(256, c.next_value())
@@ -97,7 +98,7 @@ class CounterTests(unittest.TestCase):
     def test_BE8_wraparound(self):
         """8-bit, Big endian, wraparound"""
         c = Counter.new(8)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())
         self.assertRaises(OverflowError, c.next_value)
@@ -108,7 +109,7 @@ class CounterTests(unittest.TestCase):
     def test_LE8_wraparound(self):
         """8-bit, Little endian, wraparound"""
         c = Counter.new(8, little_endian=True)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())
         self.assertRaises(OverflowError, c.next_value)
@@ -119,7 +120,7 @@ class CounterTests(unittest.TestCase):
     def test_BE8_wraparound_allowed(self):
         """8-bit, Big endian, wraparound with allow_wraparound=True"""
         c = Counter.new(8, allow_wraparound=True)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())
         self.assertEqual(0, c.next_value())
@@ -129,7 +130,7 @@ class CounterTests(unittest.TestCase):
     def test_LE8_wraparound_allowed(self):
         """8-bit, Little endian, wraparound with allow_wraparound=True"""
         c = Counter.new(8, little_endian=True, allow_wraparound=True)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())
         self.assertEqual(0, c.next_value())
@@ -139,7 +140,7 @@ class CounterTests(unittest.TestCase):
     def test_BE8_carry(self):
         """8-bit, Big endian, carry attribute"""
         c = Counter.new(8)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(0, c.carry)
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())
@@ -148,7 +149,7 @@ class CounterTests(unittest.TestCase):
     def test_LE8_carry(self):
         """8-bit, Little endian, carry attribute"""
         c = Counter.new(8, little_endian=True)
-        for i in xrange(1, 256):
+        for i in range(1, 256):
             self.assertEqual(0, c.carry)
             self.assertEqual(i, c.next_value())
             self.assertEqual(bchr(i), c())

@@ -1,9 +1,13 @@
 """Abstract class for RSA."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import range
+from future.builtins import object
 
-from cryptomath import *
+from .cryptomath import *
 
 
-class RSAKey:
+class RSAKey(object):
     """This is an abstract base class for RSA keys.
 
     Particular implementations of RSA keys, such as

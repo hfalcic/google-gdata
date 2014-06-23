@@ -1,12 +1,15 @@
 """Class for post-handshake certificate checking."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
-from utils.cryptomath import hashAndBase64
-from X509 import X509
-from X509CertChain import X509CertChain
-from errors import *
+from .utils.cryptomath import hashAndBase64
+from .X509 import X509
+from .X509CertChain import X509CertChain
+from .errors import *
 
 
-class Checker:
+class Checker(object):
     """This class is passed to a handshake function to check the other
     party's certificate chain.
 

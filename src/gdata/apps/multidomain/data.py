@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Data model classes for the Multidomain Provisioning API."""
+from __future__ import unicode_literals
+from future.builtins import str
 
 
 __author__ = 'Claudio Cherubino <ccherubino@google.com>'

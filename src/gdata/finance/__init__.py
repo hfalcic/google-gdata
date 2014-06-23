@@ -16,6 +16,7 @@
 
 
 """Contains extensions to Atom objects used with Google Finance."""
+from __future__ import unicode_literals
 
 
 __author__ = 'thesweeheng@gmail.com'

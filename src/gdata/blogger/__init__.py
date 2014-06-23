@@ -16,6 +16,7 @@
 
 
 """Contains extensions to Atom objects used with Blogger."""
+from __future__ import unicode_literals
 
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'

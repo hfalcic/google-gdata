@@ -1,9 +1,13 @@
 """Class for caching TLS sessions."""
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
+from future.builtins import object
 
-import thread
+import _thread
 import time
 
-class SessionCache:
+class SessionCache(object):
     """This class is used by the server to cache TLS sessions.
 
     Caching sessions allows the client to use TLS session resumption
@@ -31,7 +35,7 @@ class SessionCache:
         @param maxAge:  The number of seconds before a session expires
         from the cache.  The default is 14400 (i.e. 4 hours)."""
 
-        self.lock = thread.allocate_lock()
+        self.lock = _thread.allocate_lock()
 
         # Maps sessionIDs to sessions
         self.entriesDict = {}

@@ -16,6 +16,7 @@
 
 
 
+from __future__ import unicode_literals
 XML_ENTRY_1 = """<?xml version='1.0'?>
 <entry xmlns='http://www.w3.org/2005/Atom'
        xmlns:g='http://base.google.com/ns/1.0'>

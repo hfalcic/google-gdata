@@ -1,3 +1,4 @@
+from future.builtins import range
 # -*- coding: utf-8 -*-
 #
 #  SelfTest/Signature/test_pkcs1_15.py: Self-test for PKCS#1 v1.5 signatures
@@ -158,7 +159,7 @@ class PKCS1_15_Tests(unittest.TestCase):
                         if isStr(row[0]):
                                 key = RSA.importKey(row[0])
                         else:
-                                comps = [ long(rws(row[0][x]),16) for x in ('n','e','d') ]
+                                comps = [ int(rws(row[0][x]),16) for x in ('n','e','d') ]
                                 key = RSA.construct(comps)
                         h = row[3].new()
                         # Data to sign can either be in hex form or not
@@ -179,7 +180,7 @@ class PKCS1_15_Tests(unittest.TestCase):
                         if isStr(row[0]):
                                 key = RSA.importKey(row[0]).publickey()
                         else:
-                                comps = [ long(rws(row[0][x]),16) for x in ('n','e') ]
+                                comps = [ int(rws(row[0][x]),16) for x in ('n','e') ]
                                 key = RSA.construct(comps)
                         h = row[3].new()
                         # Data to sign can either be in hex form or not

@@ -1,9 +1,11 @@
 """TLS Lite + asyncore."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
 
 import asyncore
 from gdata.tlslite.TLSConnection import TLSConnection
-from AsyncStateMachine import AsyncStateMachine
+from .AsyncStateMachine import AsyncStateMachine
 
 
 class TLSAsyncDispatcherMixIn(AsyncStateMachine):

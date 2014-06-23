@@ -21,6 +21,9 @@ the Google Apps Calendar Resources API.  These interactions include the ability
 to create, retrieve, update, and delete calendar resources in a Google Apps
 domain.
 """
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'Vic Fryzel <vf@google.com>'
@@ -28,7 +31,7 @@ __author__ = 'Vic Fryzel <vf@google.com>'
 
 import gdata.calendar_resource.data
 import gdata.client
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 
 # Feed URI template.  This must end with a /
@@ -86,7 +89,7 @@ class CalendarResourceClient(gdata.client.GDClient):
     if resource_id:
       uri += resource_id
     if params:
-      uri += '?' + urllib.urlencode(params)
+      uri += '?' + urllib.parse.urlencode(params)
     return uri
 
   MakeResourceFeedUri = make_resource_feed_uri

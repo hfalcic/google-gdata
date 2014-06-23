@@ -1,10 +1,13 @@
 """Class for setting handshake parameters."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import object
 
-from constants import CertificateType
-from utils import cryptomath
-from utils import cipherfactory
+from .constants import CertificateType
+from .utils import cryptomath
+from .utils import cipherfactory
 
-class HandshakeSettings:
+class HandshakeSettings(object):
     """This class encapsulates various parameters that can be used with
     a TLS handshake.
     @sort: minKeySize, maxKeySize, cipherNames, certificateTypes,

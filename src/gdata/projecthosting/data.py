@@ -23,6 +23,7 @@
 Canonical documentation for the raw XML which these classes represent can be
 found here: http://code.google.com/p/support/wiki/IssueTrackerAPI
 """
+from __future__ import unicode_literals
 
 
 __author__ = 'jlapenna@google.com (Joe LaPenna)'

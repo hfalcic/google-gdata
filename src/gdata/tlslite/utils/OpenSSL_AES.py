@@ -1,7 +1,9 @@
 """OpenSSL/M2Crypto AES implementation."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from cryptomath import *
-from AES import *
+from .cryptomath import *
+from .AES import *
 
 if m2cryptoLoaded:
 

@@ -22,12 +22,15 @@ These interactions include the ability to create, retrieve, update and delete
 organization units, move users within organization units, retrieve customerId
 and update and retrieve users in organization units.
 """
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'
 
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gdata.apps.organization.data
 import gdata.client
 
@@ -99,7 +102,7 @@ class OrganizationUnitProvisioningClient(gdata.client.GDClient):
     if org_unit_path_or_user_email:
       uri += '/' + org_unit_path_or_user_email
     if params:
-      uri += '?' + urllib.urlencode(params)
+      uri += '?' + urllib.parse.urlencode(params)
     return uri
 
   MakeOrganizationUnitProvisioningUri = make_organization_unit_provisioning_uri

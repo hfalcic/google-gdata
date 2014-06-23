@@ -1,4 +1,5 @@
 """TLS Lite + imaplib."""
+from __future__ import unicode_literals
 
 import socket
 from imaplib import IMAP4

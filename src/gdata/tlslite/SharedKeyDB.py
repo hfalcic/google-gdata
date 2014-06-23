@@ -1,10 +1,12 @@
 """Class for storing shared keys."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from utils.cryptomath import *
-from utils.compat import *
-from mathtls import *
-from Session import Session
-from BaseDB import BaseDB
+from .utils.cryptomath import *
+from .utils.compat import *
+from .mathtls import *
+from .Session import Session
+from .BaseDB import BaseDB
 
 class SharedKeyDB(BaseDB):
     """This class represent an in-memory or on-disk database of shared

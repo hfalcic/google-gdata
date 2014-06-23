@@ -23,6 +23,7 @@
                          URL arguments (represented as strings). This is a
                          utility function used in CRUD operations.
 """
+from __future__ import unicode_literals
 
 __author__ = 'dbrattli (Dag Brattli)'
 

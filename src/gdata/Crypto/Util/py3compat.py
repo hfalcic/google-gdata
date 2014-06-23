@@ -57,6 +57,9 @@ tobytes(s)
     Take a text string, a byte string, or a sequence of character taken from
     a byte string and make a byte string.
 """
+from future.builtins import str
+from future.builtins import chr
+from future.builtins import bytes
 
 __revision__ = "$Id$"
 
@@ -79,7 +82,7 @@ if sys.version_info[0] == 2:
                 return ''.join(s)
     else:
         def tobytes(s):
-            if isinstance(s, unicode):
+            if isinstance(s, str):
                 return s.encode("latin-1")
             else:
                 return ''.join(s)

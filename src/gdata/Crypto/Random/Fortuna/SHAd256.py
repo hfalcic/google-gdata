@@ -27,6 +27,7 @@ SHA_d-256 hash function implementation.
 
 This module should comply with PEP 247.
 """
+from future.builtins import object
 
 __revision__ = "$Id$"
 __all__ = ['new', 'digest_size']

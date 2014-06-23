@@ -32,6 +32,7 @@ master key, or to thwart attacks on pass phrases (e.g. via rainbow tables).
 
 :undocumented: __revision__
 """
+from future.builtins import range
 
 __revision__ = "$Id$"
 
@@ -79,7 +80,7 @@ def PBKDF1(password, salt, dkLen, count=1000, hashAlgo=None):
         raise ValueError("Selected hash algorithm has a too short digest (%d bytes)." % digest)
     if len(salt)!=8:
         raise ValueError("Salt is not 8 bytes long.")
-    for i in xrange(count-1):
+    for i in range(count-1):
         pHash = pHash.new(pHash.digest())
     return pHash.digest()[:dkLen]
 
@@ -114,7 +115,7 @@ def PBKDF2(password, salt, dkLen=16, count=1000, prf=None):
     i = 1
     while len(key)<dkLen:
         U = previousU = prf(password,salt+struct.pack(">I", i))
-        for j in xrange(count-1):
+        for j in range(count-1):
             previousU = t = prf(password,previousU)
             U = strxor(U,t)
         key += U

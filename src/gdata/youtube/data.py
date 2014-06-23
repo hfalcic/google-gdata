@@ -16,6 +16,7 @@
 
 
 """Contains the data classes of the YouTube Data API"""
+from __future__ import unicode_literals
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'

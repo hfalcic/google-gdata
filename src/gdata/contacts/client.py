@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import unicode_literals
 from types import ListType, DictionaryType
 
 
@@ -159,7 +160,7 @@ class ContactsClient(gdata.client.GDClient):
       for link in calendar_link:
         if not isinstance(link, gdata.contacts.data.CalendarLink):
           if type(link) is not DictionaryType:
-            raise TypeError, "calendar_link Requires dictionary not %s" % type(link)
+            raise TypeError("calendar_link Requires dictionary not %s" % type(link))
 
           link = gdata.contacts.data.CalendarLink(
                                                   rel=link.get("rel", None),

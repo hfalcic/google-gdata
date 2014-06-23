@@ -20,12 +20,15 @@ GroupsClient extends gdata.client.GDClient to ease interaction
 with the Group Provisioning API.  These interactions include the
 ability to create, retrieve, update and delete groups.
 """
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'Shraddha gupta <shraddhag@google.com>'
 
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gdata.apps.groups.data
 import gdata.client
 
@@ -95,7 +98,7 @@ class GroupsProvisioningClient(gdata.client.GDClient):
     if member_id:
       uri += '/' + member_id
     if params:
-      uri += '?' + urllib.urlencode(params)
+      uri += '?' + urllib.parse.urlencode(params)
     return uri
 
   MakeGroupProvisioningUri = make_group_provisioning_uri

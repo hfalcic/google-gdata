@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Data model for parsing and generating XML for the Calendar Resource API."""
+from __future__ import unicode_literals
+from future.builtins import range
 
 
 __author__ = 'Vic Fryzel <vf@google.com>'

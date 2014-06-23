@@ -56,6 +56,7 @@ the RSA key:
 .. __: http://www.ietf.org/rfc/rfc3447.txt
 .. __: http://www.rsa.com/rsalabs/node.asp?id=2125
 """
+from future.builtins import object
 
 __revision__ = "$Id$"
 __all__ = [ 'new', 'PKCS115_SigScheme' ]
@@ -65,7 +66,7 @@ from Crypto.Util.number import ceil_div
 from Crypto.Util.asn1 import DerSequence, DerNull, DerOctetString
 from Crypto.Util.py3compat import *
 
-class PKCS115_SigScheme:
+class PKCS115_SigScheme(object):
     """This signature scheme can perform PKCS#1 v1.5 RSA signature or verification."""
 
     def __init__(self, key):

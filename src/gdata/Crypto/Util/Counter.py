@@ -51,6 +51,7 @@ An example of usage is the following:
 
 :undocumented: __package__
 """
+from future.builtins import range
 import sys
 if sys.version_info[0] == 2 and sys.version_info[1] == 1:
     from Crypto.Util.py21compat import *
@@ -115,7 +116,7 @@ def new(nbits, prefix=b(""), suffix=b(""), initial_value=1, overflow=0, little_e
 
 def _encode(n, nbytes, little_endian=False):
     retval = []
-    n = long(n)
+    n = int(n)
     for i in range(nbytes):
         if little_endian:
             retval.append(bchr(n & 0xff))

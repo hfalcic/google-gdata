@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Contains extensions to Atom objects used with Google Health."""
+from __future__ import unicode_literals
 
 __author__ = 'api.eric@google.com (Eric Bidelman)'
 

@@ -18,3 +18,4 @@
 The first example is the appengine module which contains functions and
 classes which modify a GDataService object to run on Google App Engine.
 """
+from __future__ import unicode_literals

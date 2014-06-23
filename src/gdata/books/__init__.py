@@ -11,6 +11,7 @@
           repeats that datum as atom:title.
     There is an undocumented gbs:openAccess element that is not parsed.
 """
+from __future__ import unicode_literals
 
 __author__ = "James Sams <sams.james@gmail.com>"
 __copyright__ = "Apache License v2.0"

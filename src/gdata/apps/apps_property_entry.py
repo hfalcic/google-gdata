@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Generic class for Set/Get properties of GData Provisioning clients."""
+from __future__ import unicode_literals
+from future.builtins import range
 
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'

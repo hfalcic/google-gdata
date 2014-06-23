@@ -1,5 +1,7 @@
+from __future__ import unicode_literals
+from future.builtins import object
 
-class IntegrationHelper:
+class IntegrationHelper(object):
 
     def __init__(self,
               username=None, password=None, sharedKey=None,

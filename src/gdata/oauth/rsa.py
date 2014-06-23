@@ -4,6 +4,7 @@
 requires tlslite - http://trevp.net/tlslite/
 
 """
+from __future__ import unicode_literals
 
 import binascii
 

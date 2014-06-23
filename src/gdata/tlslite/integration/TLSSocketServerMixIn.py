@@ -1,8 +1,10 @@
 """TLS Lite + SocketServer."""
+from __future__ import unicode_literals
+from future.builtins import object
 
 from gdata.tlslite.TLSConnection import TLSConnection
 
-class TLSSocketServerMixIn:
+class TLSSocketServerMixIn(object):
     """
     This class can be mixed in with any L{SocketServer.TCPServer} to
     add TLS support.

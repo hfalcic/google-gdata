@@ -24,6 +24,8 @@ Spreadsheets operations.
                          URL arguments (represented as strings). This is a
                          utility function used in CRUD operations.
 """
+from __future__ import unicode_literals
+from future.builtins import str
 
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
@@ -327,7 +329,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       The inserted row
     """
     new_entry = gdata.spreadsheet.SpreadsheetsList()
-    for k, v in row_data.iteritems():
+    for k, v in row_data.items():
       new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v
@@ -355,7 +357,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       The updated row
     """
     entry.custom = {}
-    for k, v in new_row_data.iteritems():
+    for k, v in new_row_data.items():
       new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v

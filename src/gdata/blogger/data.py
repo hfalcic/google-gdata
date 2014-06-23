@@ -16,13 +16,16 @@
 
 
 """Data model classes for parsing and generating XML for the Blogger API."""
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import re
-import urlparse
+import future.standard_library.urllib.parse as urllib_parse
 import atom.core
 import gdata.data
 
@@ -75,7 +78,7 @@ class BloggerEntry(gdata.data.GDEntry):
     """
     for link in self.link:
       if link.rel == 'alternate':
-        return urlparse.urlparse(link.href)[1].split(".", 1)[0]
+        return urllib_parse.urlparse(link.href)[1].split(".", 1)[0]
     return None
 
   GetBlogName = get_blog_name

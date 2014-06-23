@@ -23,6 +23,7 @@
 This module is used for version 2 of the Google Data APIs. The primary class
 in this module is AppsProperty.
 """
+from __future__ import unicode_literals
 
 
 __author__ = 'Vic Fryzel <vicfryzel@google.com>'

@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Contains extensions to ElementWrapper objects used with Google Contacts."""
+from __future__ import unicode_literals
 
 __author__ = 'dbrattli (Dag Brattli)'
 

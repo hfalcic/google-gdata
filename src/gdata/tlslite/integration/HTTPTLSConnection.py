@@ -1,12 +1,15 @@
 """TLS Lite + httplib."""
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
 
 import socket
-import httplib
+import future.standard_library.http.client as http_client
 from gdata.tlslite.TLSConnection import TLSConnection
 from gdata.tlslite.integration.ClientHelper import ClientHelper
 
 
-class HTTPBaseTLSConnection(httplib.HTTPConnection):
+class HTTPBaseTLSConnection(http_client.HTTPConnection):
     """This abstract class provides a framework for adding TLS support
     to httplib."""
 
@@ -15,9 +18,9 @@ class HTTPBaseTLSConnection(httplib.HTTPConnection):
     def __init__(self, host, port=None, strict=None):
         if strict == None:
             #Python 2.2 doesn't support strict
-            httplib.HTTPConnection.__init__(self, host, port)
+            http_client.HTTPConnection.__init__(self, host, port)
         else:
-            httplib.HTTPConnection.__init__(self, host, port, strict)
+            http_client.HTTPConnection.__init__(self, host, port, strict)
 
     def connect(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

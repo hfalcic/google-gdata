@@ -1,7 +1,9 @@
 """PyCrypto 3DES implementation."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from cryptomath import *
-from TripleDES import *
+from .cryptomath import *
+from .TripleDES import *
 
 if pycryptoLoaded:
     import Crypto.Cipher.DES3

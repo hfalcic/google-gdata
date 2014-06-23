@@ -48,8 +48,8 @@ the RSA key:
 .. __: http://www.ietf.org/rfc/rfc3447.txt
 .. __: http://www.rsa.com/rsalabs/node.asp?id=2125.
 """
-
 from __future__ import nested_scopes
+from future.builtins import object
 
 __revision__ = "$Id$"
 __all__ = [ 'new', 'PKCS1OAEP_Cipher' ]
@@ -62,12 +62,12 @@ import Crypto.Util.number
 from   Crypto.Util.number import ceil_div
 from   Crypto.Util.strxor import strxor
 
-class PKCS1OAEP_Cipher:
+class PKCS1OAEP_Cipher(object):
     """This cipher can perform PKCS#1 v1.5 OAEP encryption or decryption."""
 
     def __init__(self, key, hashAlgo, mgfunc, label):
         """Initialize this PKCS#1 OAEP cipher object.
-        
+
         :Parameters:
          key : an RSA key object
           If a private half is given, both encryption and decryption are possible.
@@ -84,7 +84,7 @@ class PKCS1OAEP_Cipher:
                 A label to apply to this particular encryption. If not specified,
                 an empty string is used. Specifying a label does not improve
                 security.
- 
+
         :attention: Modify the mask generation function only if you know what you are doing.
                     Sender and receiver must use the same one.
         """
@@ -112,16 +112,16 @@ class PKCS1OAEP_Cipher:
 
     def encrypt(self, message):
         """Produce the PKCS#1 OAEP encryption of a message.
-    
+
         This function is named ``RSAES-OAEP-ENCRYPT``, and is specified in
         section 7.1.1 of RFC3447.
-    
+
         :Parameters:
          message : string
                 The message to encrypt, also known as plaintext. It can be of
                 variable length, but not longer than the RSA modulus (in bytes)
                 minus 2, minus twice the hash output size.
-   
+
         :Return: A string, the ciphertext in which the message is encrypted.
             It is as long as the RSA modulus (in bytes).
         :Raise ValueError:
@@ -129,15 +129,15 @@ class PKCS1OAEP_Cipher:
             message.
         """
         # TODO: Verify the key is RSA
-    
+
         randFunc = self._key._randfunc
-    
+
         # See 7.1.1 in RFC3447
         modBits = Crypto.Util.number.size(self._key.n)
         k = ceil_div(modBits,8) # Convert from bits to bytes
         hLen = self._hashObj.digest_size
         mLen = len(message)
-    
+
         # Step 1b
         ps_len = k-mLen-2*hLen-2
         if ps_len<0:
@@ -165,17 +165,17 @@ class PKCS1OAEP_Cipher:
         # Complete step 3c (I2OSP)
         c = bchr(0x00)*(k-len(m)) + m
         return c
-    
+
     def decrypt(self, ct):
         """Decrypt a PKCS#1 OAEP ciphertext.
-    
+
         This function is named ``RSAES-OAEP-DECRYPT``, and is specified in
         section 7.1.2 of RFC3447.
-    
+
         :Parameters:
          ct : string
                 The ciphertext that contains the message to recover.
-   
+
         :Return: A string, the original message.
         :Raise ValueError:
             If the ciphertext length is incorrect, or if the decryption does not
@@ -184,12 +184,12 @@ class PKCS1OAEP_Cipher:
             If the RSA key has no private half.
         """
         # TODO: Verify the key is RSA
-    
+
         # See 7.1.2 in RFC3447
         modBits = Crypto.Util.number.size(self._key.n)
         k = ceil_div(modBits,8) # Convert from bits to bytes
         hLen = self._hashObj.digest_size
-    
+
         # Step 1b and 1c
         if len(ct) != k or k<hLen+2:
             raise ValueError("Ciphertext with incorrect length.")
@@ -247,7 +247,7 @@ def new(key, hashAlgo=None, mgfunc=None, label=b('')):
       A label to apply to this particular encryption. If not specified,
       an empty string is used. Specifying a label does not improve
       security.
- 
+
     :attention: Modify the mask generation function only if you know what you are doing.
       Sender and receiver must use the same one.
     """

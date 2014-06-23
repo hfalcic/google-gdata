@@ -76,6 +76,7 @@ verification.
 .. _DLP: http://www.cosic.esat.kuleuven.be/publications/talk-78.pdf
 .. _ECRYPT: http://www.ecrypt.eu.org/documents/D.SPA.17.pdf
 """
+from future.builtins import object
 
 __revision__ = "$Id$"
 
@@ -219,7 +220,7 @@ class _DSAobj(pubkey.pubkey):
             self.implementation = DSAImplementation()
         t = []
         for k in self.keydata:
-            if not d.has_key(k):
+            if k not in d:
                 break
             t.append(d[k])
         self.key = self.implementation._math.dsa_construct(*tuple(t))

@@ -23,10 +23,12 @@
 # ===================================================================
 
 """Self-test suite for Crypto.Cipher.DES"""
+from __future__ import absolute_import
+from future.builtins import range
 
 __revision__ = "$Id$"
 
-from common import dict     # For compatibility with Python 2.1 and 2.2
+from .common import dict     # For compatibility with Python 2.1 and 2.2
 from Crypto.Util.py3compat import *
 import unittest
 
@@ -328,7 +330,7 @@ class RonRivestTest(unittest.TestCase):
 
 def get_tests(config={}):
     from Crypto.Cipher import DES
-    from common import make_block_tests
+    from .common import make_block_tests
     return make_block_tests(DES, "DES", test_data) + [RonRivestTest()]
 
 if __name__ == '__main__':

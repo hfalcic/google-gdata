@@ -1,3 +1,5 @@
+from future.builtins import filter
+from future.builtins import object
 # -*- coding: ascii -*-
 #
 #  Util/asn1.py : Minimal support for ASN.1 DER binary encoding.
@@ -26,7 +28,7 @@ from Crypto.Util.py3compat import *
 
 __all__ = [ 'DerObject', 'DerInteger', 'DerOctetString', 'DerNull', 'DerSequence', 'DerObjectId' ]
 
-class DerObject:
+class DerObject(object):
         """Base class for defining a single DER object.
 
         Instantiate this class ONLY when you have to decode a DER element.
@@ -187,7 +189,7 @@ class DerSequence(DerObject):
 
         def hasInts(self):
                 """Return the number of items in this sequence that are numbers."""
-                return len(filter(isInt, self._seq))
+                return len(list(filter(isInt, self._seq)))
 
         def hasOnlyInts(self):
                 """Return True if all items in this sequence are numbers."""

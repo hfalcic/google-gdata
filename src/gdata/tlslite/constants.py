@@ -1,11 +1,14 @@
 """Constants used in various places."""
+from __future__ import unicode_literals
+from future.builtins import range
+from future.builtins import object
 
-class CertificateType:
+class CertificateType(object):
     x509 = 0
     openpgp = 1
     cryptoID = 2
 
-class HandshakeType:
+class HandshakeType(object):
     hello_request = 0
     client_hello = 1
     server_hello = 2
@@ -17,18 +20,18 @@ class HandshakeType:
     client_key_exchange = 16
     finished = 20
 
-class ContentType:
+class ContentType(object):
     change_cipher_spec = 20
     alert = 21
     handshake = 22
     application_data = 23
     all = (20,21,22,23)
 
-class AlertLevel:
+class AlertLevel(object):
     warning = 1
     fatal = 2
 
-class AlertDescription:
+class AlertDescription(object):
     """
     @cvar bad_record_mac: A TLS record failed to decrypt properly.
 
@@ -86,7 +89,7 @@ class AlertDescription:
     missing_srp_username = 121
     untrusted_srp_parameters = 122
 
-class CipherSuite:
+class CipherSuite(object):
     TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA  = 0x0050
     TLS_SRP_SHA_WITH_AES_128_CBC_SHA = 0x0053
     TLS_SRP_SHA_WITH_AES_256_CBC_SHA = 0x0056
@@ -170,30 +173,30 @@ class CipherSuite:
     rc4Suites.append(TLS_RSA_WITH_RC4_128_SHA)
 
 
-class Fault:
+class Fault(object):
     badUsername = 101
     badPassword = 102
     badA = 103
-    clientSrpFaults = range(101,104)
+    clientSrpFaults = list(range(101,104))
 
     badVerifyMessage = 601
-    clientCertFaults = range(601,602)
+    clientCertFaults = list(range(601,602))
 
     badPremasterPadding = 501
     shortPremasterSecret = 502
-    clientNoAuthFaults = range(501,503)
+    clientNoAuthFaults = list(range(501,503))
 
     badIdentifier = 401
     badSharedKey = 402
-    clientSharedKeyFaults = range(401,403)
+    clientSharedKeyFaults = list(range(401,403))
 
     badB = 201
-    serverFaults = range(201,202)
+    serverFaults = list(range(201,202))
 
     badFinished = 300
     badMAC = 301
     badPadding = 302
-    genericFaults = range(300,303)
+    genericFaults = list(range(300,303))
 
     faultAlerts = {\
         badUsername: (AlertDescription.unknown_srp_username, \

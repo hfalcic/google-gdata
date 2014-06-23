@@ -62,6 +62,8 @@ it is recommended to use one of the standardized schemes instead (like
 
 :sort: generate,construct,importKey,error
 """
+from future.builtins import range
+from future.builtins import object
 
 __revision__ = "$Id$"
 
@@ -288,7 +290,7 @@ class _RSAobj(pubkey.pubkey):
             self.implementation = RSAImplementation()
         t = []
         for k in self.keydata:
-            if not d.has_key(k):
+            if k not in d:
                 break
             t.append(d[k])
         self.key = self.implementation._math.rsa_construct(*tuple(t))
@@ -582,7 +584,7 @@ class RSAImplementation(object):
                     if privateKey.isType('OCTET STRING'):
                         return self._importKeyDER(privateKey.payload)
 
-        except ValueError, IndexError:
+        except ValueError as IndexError:
             pass
 
         raise ValueError("RSA key format is not supported")

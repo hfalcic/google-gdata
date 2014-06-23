@@ -16,6 +16,7 @@ or use one of the integration classes in L{tlslite.integration}.
 
 @version: 0.3.8
 """
+from __future__ import unicode_literals
 __version__ = "0.3.8"
 
 __all__ = ["api",

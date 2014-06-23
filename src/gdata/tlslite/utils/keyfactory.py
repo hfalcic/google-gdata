@@ -2,18 +2,20 @@
 @sort: generateRSAKey, parseXMLKey, parsePEMKey, parseAsPublicKey,
 parseAsPrivateKey
 """
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from compat import *
+from .compat import *
 
-from RSAKey import RSAKey
-from Python_RSAKey import Python_RSAKey
-import cryptomath
+from .RSAKey import RSAKey
+from .Python_RSAKey import Python_RSAKey
+from . import cryptomath
 
 if cryptomath.m2cryptoLoaded:
-    from OpenSSL_RSAKey import OpenSSL_RSAKey
+    from .OpenSSL_RSAKey import OpenSSL_RSAKey
 
 if cryptomath.pycryptoLoaded:
-    from PyCrypto_RSAKey import PyCrypto_RSAKey
+    from .PyCrypto_RSAKey import PyCrypto_RSAKey
 
 # **************************************************************************
 # Factory Functions for RSA Keys

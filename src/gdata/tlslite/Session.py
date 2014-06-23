@@ -1,10 +1,15 @@
 """Class representing a TLS session."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import chr
+from future.builtins import range
+from future.builtins import object
 
-from utils.compat import *
-from mathtls import *
-from constants import *
+from .utils.compat import *
+from .mathtls import *
+from .constants import *
 
-class Session:
+class Session(object):
     """
     This class represents a TLS session.
 

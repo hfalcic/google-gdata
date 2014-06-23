@@ -1,3 +1,5 @@
+from future.builtins import map
+from future.builtins import object
 #
 #   pubkey.py : Internal functions for public key operations
 #
@@ -30,7 +32,7 @@ import types, warnings
 from Crypto.Util.number import *
 
 # Basic public key class
-class pubkey:
+class pubkey(object):
     """An abstract class for a public key object.
 
     :undocumented: __getstate__, __setstate__, __eq__, __ne__, validate
@@ -45,7 +47,7 @@ class pubkey:
         restoration."""
         d=self.__dict__
         for key in self.keydata:
-            if d.has_key(key): d[key]=long(d[key])
+            if key in d: d[key]=int(d[key])
         return d
 
     def __setstate__(self, d):
@@ -53,7 +55,7 @@ class pubkey:
 number representation being used, whether that is Python long
 integers, MPZ objects, or whatever."""
         for key in self.keydata:
-            if d.has_key(key): self.__dict__[key]=bignum(d[key])
+            if key in d: self.__dict__[key]=bignum(d[key])
 
     def encrypt(self, plaintext, K):
         """Encrypt a piece of data.
@@ -68,9 +70,9 @@ integers, MPZ objects, or whatever."""
          plaintext (string or long).
         """
         wasString=0
-        if isinstance(plaintext, types.StringType):
+        if isinstance(plaintext, bytes):
             plaintext=bytes_to_long(plaintext) ; wasString=1
-        if isinstance(K, types.StringType):
+        if isinstance(K, bytes):
             K=bytes_to_long(K)
         ciphertext=self._encrypt(plaintext, K)
         if wasString: return tuple(map(long_to_bytes, ciphertext))
@@ -86,9 +88,9 @@ integers, MPZ objects, or whatever."""
          of byte strings. A long otherwise.
         """
         wasString=0
-        if not isinstance(ciphertext, types.TupleType):
+        if not isinstance(ciphertext, tuple):
             ciphertext=(ciphertext,)
-        if isinstance(ciphertext[0], types.StringType):
+        if isinstance(ciphertext[0], bytes):
             ciphertext=tuple(map(bytes_to_long, ciphertext)) ; wasString=1
         plaintext=self._decrypt(ciphertext)
         if wasString: return long_to_bytes(plaintext)
@@ -107,8 +109,8 @@ integers, MPZ objects, or whatever."""
         """
         if (not self.has_private()):
             raise TypeError('Private key not available in this object')
-        if isinstance(M, types.StringType): M=bytes_to_long(M)
-        if isinstance(K, types.StringType): K=bytes_to_long(K)
+        if isinstance(M, bytes): M=bytes_to_long(M)
+        if isinstance(K, bytes): K=bytes_to_long(K)
         return self._sign(M, K)
 
     def verify (self, M, signature):
@@ -122,7 +124,7 @@ integers, MPZ objects, or whatever."""
 
         :Return: True if the signature is correct, False otherwise.
         """
-        if isinstance(M, types.StringType): M=bytes_to_long(M)
+        if isinstance(M, bytes): M=bytes_to_long(M)
         return self._verify(M, signature)
 
     # alias to compensate for the old validate() name
@@ -142,9 +144,9 @@ integers, MPZ objects, or whatever."""
         :Return: A byte string if M was so. A long otherwise.
         """
         wasString=0
-        if isinstance(M, types.StringType):
+        if isinstance(M, bytes):
             M=bytes_to_long(M) ; wasString=1
-        if isinstance(B, types.StringType): B=bytes_to_long(B)
+        if isinstance(B, bytes): B=bytes_to_long(B)
         blindedmessage=self._blind(M, B)
         if wasString: return long_to_bytes(blindedmessage)
         else: return blindedmessage
@@ -159,9 +161,9 @@ integers, MPZ objects, or whatever."""
         :Type B: byte string or long
         """
         wasString=0
-        if isinstance(M, types.StringType):
+        if isinstance(M, bytes):
             M=bytes_to_long(M) ; wasString=1
-        if isinstance(B, types.StringType): B=bytes_to_long(B)
+        if isinstance(B, bytes): B=bytes_to_long(B)
         unblindedmessage=self._unblind(M, B)
         if wasString: return long_to_bytes(unblindedmessage)
         else: return unblindedmessage

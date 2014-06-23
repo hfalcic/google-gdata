@@ -19,3 +19,4 @@
 
 See: http://code.google.com/apis/shopping/content/index.html
 """
+from __future__ import unicode_literals

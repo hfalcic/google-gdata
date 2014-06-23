@@ -1,9 +1,13 @@
 """Pure-Python AES implementation."""
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from future.builtins import range
 
-from cryptomath import *
+from .cryptomath import *
 
-from AES import *
-from rijndael import rijndael
+from .AES import *
+from .rijndael import rijndael
 
 def new(key, mode, IV):
     return Python_AES(key, mode, IV)

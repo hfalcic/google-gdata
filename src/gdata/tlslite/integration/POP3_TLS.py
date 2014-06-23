@@ -1,4 +1,5 @@
 """TLS Lite + poplib."""
+from __future__ import unicode_literals
 
 import socket
 from poplib import POP3
@@ -114,14 +115,14 @@ class POP3_TLS(POP3, ClientHelper):
             try:
                 self.sock = socket.socket(af, socktype, proto)
                 self.sock.connect(sa)
-            except socket.error, msg:
+            except socket.error as msg:
                 if self.sock:
                     self.sock.close()
                 self.sock = None
                 continue
             break
         if not self.sock:
-            raise socket.error, msg
+            raise socket.error(msg)
 
         ### New code below (all else copied from poplib)
         ClientHelper.__init__(self,

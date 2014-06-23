@@ -22,6 +22,7 @@ gdata.gauth's token_from_blob and token_to_blob to allow auth token objects
 to be reused across requests. It is up to your own code to ensure that the
 token key's are unique.
 """
+from __future__ import unicode_literals
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 

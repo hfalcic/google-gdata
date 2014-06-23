@@ -15,6 +15,7 @@
 # limitations under the License.
 
 """Data model for parsing and generating XML for the Google Apps Marketplace Licensing API."""
+from __future__ import unicode_literals
 
 
 __author__ = 'Alexandre Vivien <alex@simplecode.fr>'

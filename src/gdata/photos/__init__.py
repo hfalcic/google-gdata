@@ -32,6 +32,9 @@ documentation or live help() system for available methods.
 [1]: http://gdata-python-client.googlecode.com/
 
   """
+from __future__ import division
+from __future__ import unicode_literals
+from future.builtins import object
 
 __author__ = u'havard@gulldahl.no'# (Håvard Gulldahl)' #BUG: pydoc chokes on non-ascii chars in __author__
 __license__ = 'Apache License v2'

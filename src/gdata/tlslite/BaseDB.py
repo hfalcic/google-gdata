@@ -1,9 +1,13 @@
 """Base class for SharedKeyDB and VerifierDB."""
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_hooks()
+from future.builtins import object
 
 import anydbm
-import thread
+import _thread
 
-class BaseDB:
+class BaseDB(object):
     def __init__(self, filename, type):
         self.type = type
         self.filename = filename
@@ -11,7 +15,7 @@ class BaseDB:
             self.db = None
         else:
             self.db = {}
-        self.lock = thread.allocate_lock()
+        self.lock = _thread.allocate_lock()
 
     def create(self):
         """Create a new on-disk database.
@@ -94,7 +98,7 @@ class BaseDB:
 
         self.lock.acquire()
         try:
-            return self.db.has_key(username)
+            return username in self.db
         finally:
             self.lock.release()
 
@@ -113,7 +117,7 @@ class BaseDB:
 
         self.lock.acquire()
         try:
-            usernames = self.db.keys()
+            usernames = list(self.db.keys())
         finally:
             self.lock.release()
         usernames = [u for u in usernames if not u.startswith("--Reserved--")]

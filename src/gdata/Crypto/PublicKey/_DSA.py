@@ -1,3 +1,5 @@
+from future.builtins import range
+from future.builtins import object
 
 #
 #   DSA.py : Digital Signature Algorithm
@@ -50,7 +52,7 @@ def generateQ(randfunc):
         q=q*256+c
     while (not isPrime(q)):
         q=q+2
-    if pow(2,159L) < q < pow(2,160L):
+    if pow(2,159) < q < pow(2,160):
         return S, q
     raise RuntimeError('Bad q value generated')
 
@@ -80,7 +82,7 @@ def generate_py(bits, randfunc, progress_func=None):
                 V[k]=bytes_to_long(SHA.new(S+bstr(N)+bstr(k)).digest())
             W=V[n] % powb
             for k in range(n-1, -1, -1):
-                W=(W<<160L)+V[k]
+                W=(W<<160)+V[k]
             X=W+powL1
             p=X-(X%(2*obj.q)-1)
             if powL1<=p and isPrime(p):
@@ -110,6 +112,6 @@ def generate_py(bits, randfunc, progress_func=None):
     obj.x, obj.y = x, pow(g, x, p)
     return obj
 
-class DSAobj:
+class DSAobj(object):
     pass
 

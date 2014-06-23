@@ -1,3 +1,5 @@
+from future.builtins import range
+from future.builtins import object
 # -*- coding: utf-8 -*-
 #
 #  Random/_UserFriendlyRNG.py : A user-friendly random number generator
@@ -120,7 +122,7 @@ class _UserFriendlyRNG(object):
         """Return N bytes from the RNG."""
         if self.closed:
             raise ValueError("I/O operation on closed file")
-        if not isinstance(N, (long, int)):
+        if not isinstance(N, int):
             raise TypeError("an integer is required")
         if N < 0:
             raise ValueError("cannot read to end of infinite stream")

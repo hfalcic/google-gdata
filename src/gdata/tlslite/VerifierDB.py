@@ -1,9 +1,11 @@
 """Class for storing SRP password verifiers."""
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-from utils.cryptomath import *
-from utils.compat import *
-import mathtls
-from BaseDB import BaseDB
+from .utils.cryptomath import *
+from .utils.compat import *
+from . import mathtls
+from .BaseDB import BaseDB
 
 class VerifierDB(BaseDB):
     """This class represent an in-memory or on-disk database of SRP

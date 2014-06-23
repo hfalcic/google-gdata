@@ -38,6 +38,7 @@
           web interface have an obvious way to have multiple labels. Multiple
           labels are never returned.
 """
+from __future__ import unicode_literals
 
 __author__ = "James Sams <sams.james@gmail.com>"
 __copyright__ = "Apache License v2.0"
@@ -124,7 +125,7 @@ class BookService(gdata.service.GDataService):
                     upper bound is exclusive
         """
 
-        for k, v in kwargs.items():
+        for k, v in list(kwargs.items()):
             if not v:
                 continue
             k = k.lower()

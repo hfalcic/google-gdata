@@ -15,6 +15,8 @@
 # limitations under the License.
 
 """Data model classes for representing elements of the Documents List API."""
+from __future__ import unicode_literals
+from future.builtins import object
 
 __author__ = 'vicfryzel@google.com (Vic Fryzel)'
 
@@ -178,8 +180,8 @@ class CategoryFinder(object):
       atom.data.Category if found or None.
     """
     try:
-      return self.get_categories(scheme).next()
-    except StopIteration, e:
+      return next(self.get_categories(scheme))
+    except StopIteration as e:
       # The entry doesn't have the category
       return None
 
@@ -367,7 +369,7 @@ class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
     entry = AclEntry()
 
     if role is not None:
-      if isinstance(role, basestring):
+      if isinstance(role, str):
         role = gdata.acl.data.AclRole(value=role)
 
       if key:
@@ -409,11 +411,11 @@ class Resource(gdata.data.BatchEntry, CategoryFinder):
 
   def __init__(self, type=None, title=None, **kwargs):
     super(Resource, self).__init__(**kwargs)
-    if isinstance(type, basestring):
+    if isinstance(type, str):
       self.set_resource_type(type)
 
     if title is not None:
-      if isinstance(title, basestring):
+      if isinstance(title, str):
         self.title = atom.data.Title(text=title)
       else:
         self.title = title

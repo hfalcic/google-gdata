@@ -20,6 +20,7 @@
 # SOFTWARE.
 # ===================================================================
 """Module with definitions common to all block ciphers."""
+from future.builtins import object
 
 import sys
 if sys.version_info[0] == 2 and sys.version_info[1] == 1:
@@ -130,7 +131,7 @@ def _getParameter(name, index, args, kwargs, default=None):
         param = args[index]
     return param or default
     
-class BlockAlgo:
+class BlockAlgo(object):
     """Class modelling an abstract block cipher."""
 
     def __init__(self, factory, key, *args, **kwargs):

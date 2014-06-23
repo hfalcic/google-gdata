@@ -1,4 +1,5 @@
 """Classes for integrating TLS Lite with other packages."""
+from __future__ import unicode_literals
 
 __all__ = ["AsyncStateMachine",
            "HTTPTLSConnection",

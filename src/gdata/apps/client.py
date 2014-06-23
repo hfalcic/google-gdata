@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """AppsClient adds Client Architecture to Provisioning API."""
+from __future__ import unicode_literals
 
 
 __author__ = '<Shraddha Gupta shraddhag@google.com>'
