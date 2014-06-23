@@ -51,6 +51,8 @@ except ImportError:
   pass
 
 
+# Important to choose something that can encode any Unicode code point
+STRING_ENCODING = 'utf-8'
 
 class ProxyError(atom.http_interface.Error):
   pass
@@ -346,19 +348,19 @@ def _send_data_part(data, connection):
     connection.send(data)
     return
   elif isinstance(data, six.text_type):
-    connection.send(data.encode())
+    connection.send(data.encode(STRING_ENCODING))
     return
   # Check to see if data is a file-like object that has a read method.
   elif hasattr(data, 'read'):
     # Read the file and send it a chunk at a time.
     while True:
       binarydata = data.read(100000)
-      if binarydata == '':
+      if not binarydata:
         break
       connection.send(binarydata)
     return
   else:
     # The data object was not a file.
     # Try to convert to a string and send the data.
-    connection.send(str(data))
+    connection.send(str(data).encode(STRING_ENCODING))
     return
