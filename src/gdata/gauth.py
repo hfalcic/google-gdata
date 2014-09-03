@@ -237,6 +237,7 @@ def get_client_login_token_string(http_body):
   Returns:
     The token value string for a ClientLoginToken.
   """
+  http_body = http_body.decode('utf-8')
   for response_line in http_body.splitlines():
     if response_line.startswith('Auth='):
       # Strip off the leading Auth= and return the Authorization value.
