@@ -375,6 +375,9 @@ class AtomBase(ExtensionContainer):
     return ElementTree.tostring(self._ToElementTree(), encoding=string_encoding)
 
   def __str__(self):
+    return self.ToString(string_encoding='unicode')
+
+  def __bytes__(self):
     return self.ToString()
 
 

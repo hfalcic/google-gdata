@@ -1286,13 +1286,13 @@ class GDataService(atom.service.AtomService):
       if ElementTree.iselement(data):
         data_str = ElementTree.tostring(data)
       else:
-        data_str = str(data)
+        data_str = bytes(data)
 
       multipart = []
-      multipart.append('Media multipart posting\r\n--END_OF_PART\r\n' + \
+      multipart.append('Media multipart posting\r\n--END_OF_PART\r\n' +
           'Content-Type: application/atom+xml\r\n\r\n')
-      multipart.append('\r\n--END_OF_PART\r\nContent-Type: ' + \
-          media_source.content_type+'\r\n\r\n')
+      multipart.append('\r\n--END_OF_PART\r\nContent-Type: ' +
+          media_source.content_type + '\r\n\r\n')
       multipart.append('\r\n--END_OF_PART--\r\n')
 
       extra_headers['MIME-version'] = '1.0'
