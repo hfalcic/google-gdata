@@ -273,14 +273,14 @@ def get_captcha_challenge(http_body,
   contains_captcha_challenge = False
   captcha_parameters = {}
   for response_line in http_body.splitlines():
-    if response_line.startswith('Error=CaptchaRequired'):
+    if response_line.startswith(b'Error=CaptchaRequired'):
       contains_captcha_challenge = True
-    elif response_line.startswith('CaptchaToken='):
+    elif response_line.startswith(b'CaptchaToken='):
       # Strip off the leading CaptchaToken=
-      captcha_parameters['token'] = response_line[13:]
-    elif response_line.startswith('CaptchaUrl='):
+      captcha_parameters['token'] = response_line[13:].decode('utf-8')
+    elif response_line.startswith(b'CaptchaUrl='):
       captcha_parameters['url'] = '%s%s' % (captcha_base_url,
-          response_line[11:])
+          response_line[11:].decode('utf-8'))
   if contains_captcha_challenge:
     return captcha_parameters
   else:
