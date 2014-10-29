@@ -17,6 +17,7 @@
 
 __author__ = 'api.jscudder (Jeff Scudder)'
 
+import six
 
 import urllib.parse
 import urllib.request, urllib.parse, urllib.error
@@ -101,38 +102,38 @@ class Url(object):
     else:
       return self.path
 
-  def __cmp__(self, other):
+  def __eq__(self, other):
     if not isinstance(other, Url):
-      return cmp(self.to_string(), str(other))
-    difference = 0
+      return self.to_string() == str(other)
+    same = True
     # Compare the protocol
     if self.protocol and other.protocol:
-      difference = cmp(self.protocol, other.protocol)
+      same = self.protocol == other.protocol
     elif self.protocol and not other.protocol:
-      difference = cmp(self.protocol, DEFAULT_PROTOCOL)
+      same = self.protocol == DEFAULT_PROTOCOL
     elif not self.protocol and other.protocol:
-      difference = cmp(DEFAULT_PROTOCOL, other.protocol)
-    if difference != 0:
-      return difference
+      same = DEFAULT_PROTOCOL == other.protocol
+    if not same:
+      return False
     # Compare the host
-    difference = cmp(self.host, other.host)
-    if difference != 0:
-      return difference
+    same = self.host == other.host
+    if not same:
+      return False
     # Compare the port
     if self.port and other.port:
-      difference = cmp(self.port, other.port)
+      same = self.port == other.port
     elif self.port and not other.port:
-      difference = cmp(self.port, DEFAULT_PORT)
+      same = self.port == DEFAULT_PORT
     elif not self.port and other.port:
-      difference = cmp(DEFAULT_PORT, other.port)
-    if difference != 0:
-      return difference
+      same = DEFAULT_PORT == other.port
+    if not same:
+      return False
     # Compare the path
-    difference = cmp(self.path, other.path)
-    if difference != 0:
-      return difference
+    same = self.path == other.path
+    if not same:
+      return False
     # Compare the parameters
-    return cmp(self.params, other.params)
+    return self.params == other.params
 
   def __str__(self):
     return self.to_string()
