@@ -70,7 +70,7 @@ XML_STRING_ENCODING = 'utf-8'
 # The desired string encoding for object members. set or monkey-patch to
 # unicode (py2) or str (py3) if you want object members to be Python text strings, instead of
 # byte strings
-MEMBER_STRING_ENCODING = 'utf-8'
+MEMBER_STRING_ENCODING = six.text_type
 #MEMBER_STRING_ENCODING = unicode
 
 # If True, all methods which are exclusive to v1 will raise a
@@ -122,9 +122,6 @@ def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
     contents of the XML - or None if the root XML tag and namespace did not
     match those of the target class.
   """
-  encoding = string_encoding or XML_STRING_ENCODING
-  if encoding and isinstance(xml_string, six.text_type):
-    xml_string = xml_string.encode(encoding)
   tree = ElementTree.fromstring(xml_string)
   return _CreateClassFromElementTree(target_class, tree)
 
