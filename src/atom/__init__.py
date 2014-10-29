@@ -331,7 +331,7 @@ class AtomBase(ExtensionContainer):
     for xml_attribute, member_name in six.iteritems(self.__class__._attributes):
       member = getattr(self, member_name)
       if member is not None:
-        if isinstance(member, six.text_type) or MEMBER_STRING_ENCODING is six.text_type:
+        if isinstance(member, six.text_type):
           tree.attrib[xml_attribute] = member
         else:
           tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
