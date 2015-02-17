@@ -138,3 +138,5 @@ class Url(object):
   def __str__(self):
     return self.to_string()
 
+  def __hash__(self):
+    return hash((self.protocol, self.host, self.port, self.path, self.get_param_string()))
